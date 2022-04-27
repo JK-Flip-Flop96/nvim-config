@@ -26,7 +26,7 @@ return packer.startup(function()
     		requires = {
     			'kyazdani42/nvim-web-devicons'
     		}, 
-		cmd = {"NvimTreeToggle", "NvimTreeClose"}, 
+		cmd = {"NvimTreeToggle", "NvimTreeOpen", "NvimTreeClose"}, 
 			config = function()
 				require("nvim-tree").setup {
 				    update_focused_file = {enable = true, update_cwd = true}
@@ -40,12 +40,7 @@ return packer.startup(function()
 		run = ':TSUpdate'
 	}
 
-	use {
-		'goolord/alpha-nvim',
-		config = function()
-			require'alpha'.setup(require'alpha.themes.dashboard'.config)
-		end
-	}
+	use 'goolord/alpha-nvim'
 
 	use {
 		'RRethy/nvim-base16',

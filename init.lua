@@ -2,6 +2,7 @@
 require "plugins"
 
 -- Plugin Config Files
+require "configs/alpha-nvim"
 require "configs/nvim-tree"
 require "configs/treesitter"
 
