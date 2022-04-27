@@ -30,4 +30,19 @@ dashboard.section.header.val = {
     [[        _\///_____\/////_____\//////////______\/////__________\///_______\///___\///___\///___\///__]],
 }
 
+
+dashboard.section.footer.val = {
+    "Config by Stuart Miller 2022",
+}
+
+-- Layout For Luavim ascii art
+dashboard.config.layout = {
+    { type = "padding", val = 5 },
+    dashboard.section.header,
+    { type = "padding", val = 2 },
+    dashboard.section.buttons,
+    { type = "padding", val = 1 },
+    dashboard.section.footer,
+}
+
 alpha.setup(dashboard.opts)
