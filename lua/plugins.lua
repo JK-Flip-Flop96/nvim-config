@@ -66,4 +66,7 @@ return packer.startup(function()
 	}
 
 	use "lewis6991/impatient.nvim"
+	use "hrsh7th/nvim-cmp"
+  	use "L3MON4D3/LuaSnip"
+
 end)
