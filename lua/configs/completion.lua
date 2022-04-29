@@ -112,11 +112,11 @@ cmp.setup {
     },
     -- Cmp Sources
     sources = {
-	{ name = "nvim_lsp" }
-	{ name = "luasnip" }
+	{ name = "nvim_lsp" },
+	{ name = "luasnip" },
     },
     confirm_opts = {
-	behaviour = cmp.ConfirmBehaviour.Replace,
+	behaviour = cmp.ConfirmBehavior.Replace,
 	select = false
     }, 
     experimental = {

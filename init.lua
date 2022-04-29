@@ -3,7 +3,9 @@ require "plugins"
 
 -- Plugin Config Files
 require "configs/alpha-nvim"
+require "configs/completion"
 require "configs/nvim-tree"
+require "configs/statusline"
 require "configs/treesitter"
 
 -- Settings

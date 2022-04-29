@@ -23,15 +23,18 @@ return packer.startup(function()
 	-- File Tree
 	use {
 		'kyazdani42/nvim-tree.lua',
-    		requires = {
-    			'kyazdani42/nvim-web-devicons'
-    		}, 
-		cmd = {"NvimTreeToggle", "NvimTreeOpen", "NvimTreeClose"}, 
-			config = function()
-				require("nvim-tree").setup {
-				    update_focused_file = {enable = true, update_cwd = true}
-				}
-			end,
+		cmd = {'NvimTreeToggle', 'NvimTreeOpen'},
+		config = function()
+		  	require('nvim-tree').setup {
+				update_focused_file = {enable = true, update_cwd = true}
+		  	}
+		end
+	}
+	  
+
+	use {
+		'romgrk/barbar.nvim',
+		requires = {'kyazdani42/nvim-web-devicons'}
 	}
 
 	-- Tree Sitter
@@ -49,14 +52,7 @@ return packer.startup(function()
 		end
 	}
 
-	use {
-		"nvim-lualine/lualine.nvim",
-		config = function()
-			require('lualine').setup{
-				options = { theme = 'base16'}
-			}
-		end
-	}
+	use "nvim-lualine/lualine.nvim"
 
 	use {
 		'lewis6991/gitsigns.nvim',
