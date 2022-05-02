@@ -14,3 +14,5 @@ local config = {
 }
 
 lualine.setup(config)
+
+vim.opt.laststatus = 3

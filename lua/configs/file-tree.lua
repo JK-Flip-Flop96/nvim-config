@@ -1,7 +1,4 @@
-local status_ok, nvim_tree = pcall(require, "nvim-tree")
-if not status_ok then
-  	return
-end
+local nvim_tree = require("nvim-tree")
 
 local config_status_ok, nvim_tree_config = pcall(require, "nvim-tree.config")
 if not config_status_ok then
@@ -29,9 +26,9 @@ vim.g.nvim_tree_icons = {
 	  	empty_open = "",
 	  	symlink = "",
 	},
-  }
+}
   
-  nvim_tree.setup {
+nvim_tree.setup {
 	disable_netrw = true,
 	hijack_netrw = true,
 	open_on_setup = false,
@@ -117,4 +114,17 @@ vim.g.nvim_tree_icons = {
 		}
 	}
 }
-  
+
+local tree = {}
+
+function tree.open()
+	require'bufferline.state'.set_offset(0)
+	require'nvim-tree'.find_file(true)
+end 
+   
+function tree.close()
+	require'bufferline.state'.set_offset(0)
+	require'nvim-tree'.close()
+end
+
+return tree

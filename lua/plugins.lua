@@ -21,17 +21,9 @@ return packer.startup(function()
 	use 'wbthomason/packer.nvim'
 
 	-- File Tree
-	use {
-		'kyazdani42/nvim-tree.lua',
-		cmd = {'NvimTreeToggle', 'NvimTreeOpen'},
-		config = function()
-		  	require('nvim-tree').setup {
-				update_focused_file = {enable = true, update_cwd = true}
-		  	}
-		end
-	}
+	use 'kyazdani42/nvim-tree.lua'
 	  
-
+	-- Tab Bar
 	use {
 		'romgrk/barbar.nvim',
 		requires = {'kyazdani42/nvim-web-devicons'}
@@ -43,8 +35,10 @@ return packer.startup(function()
 		run = ':TSUpdate'
 	}
 
+	-- Startup Screen
 	use 'goolord/alpha-nvim'
 
+	-- Colour Scheme
 	use {
 		'RRethy/nvim-base16',
 		config = function()
@@ -52,8 +46,10 @@ return packer.startup(function()
 		end
 	}
 
+	-- Status Line styles
 	use "nvim-lualine/lualine.nvim"
 
+	-- Git Icons
 	use {
 		'lewis6991/gitsigns.nvim',
 		config = function()
@@ -61,8 +57,21 @@ return packer.startup(function()
 		end
 	}
 
+	-- Startup performance enhancement
 	use "lewis6991/impatient.nvim"
-	use "hrsh7th/nvim-cmp"
-  	use "L3MON4D3/LuaSnip"
+
+	-- Completions
+	use "hrsh7th/nvim-cmp" -- Base plugin
+  	use "L3MON4D3/LuaSnip" -- Snippets
+
+	-- Indent markers
+	use "lukas-reineke/indent-blankline.nvim"
+	
+	-- Smooth Scrolling
+	use 'karb94/neoscroll.nvim'
+
+	use 'nvim-lua/plenary.nvim'
+
+	use 'yegappan/mru'
 
 end)
