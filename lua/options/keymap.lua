@@ -6,31 +6,18 @@ keymap("", "<Space>", "<Nop>", {})
 vim.g.mapleader = " "
 vim.g.maplocalleader = " "
 
--- Moving between splits with Ctrl + [HJKL]/Ctrl + [Arrow Keys]
-keymap("n", "<A-h>", "<C-w>h", {})
-keymap("n", "<A-Left>", "<C-w>h", {})
-
-keymap("n", "<A-j>", "<C-w>j", {})
-keymap("n", "<A-Up>", "<C-w>j", {})
-
-keymap("n", "<A-k>", "<C-w>k", {})
-keymap("n", "<A-Down>", "<C-w>k", {})
-
-keymap("n", "<A-l>", "<C-w>l", {})
-keymap("n", "<A-Right>", "<C-w>l", {})
-
 -- Resizing splits with Alt + [HJKL]/Alt + [Arrow Keys]
-keymap ("n", "<C-h>", ":vertical resize -5<cr>", {})
-keymap ("n", "<C-Left>", ":vertical resize -5<cr>", {})
+keymap ("n", "<A-h>", ":vertical resize -5<cr>", {})
+keymap ("n", "<A-Left>", ":vertical resize -5<cr>", {})
 
-keymap ("n", "<C-j>", ":resize +5<cr>", {})
-keymap ("n", "<C-Up>", ":resize +5<cr>", {})
+keymap ("n", "<A-j>", ":resize +5<cr>", {})
+keymap ("n", "<A-Up>", ":resize +5<cr>", {})
 
-keymap ("n", "<C-k>", ":resize -5<cr>", {})
-keymap ("n", "<C-Down>", ":resize -5<cr>", {})
+keymap ("n", "<A-k>", ":resize -5<cr>", {})
+keymap ("n", "<A-Down>", ":resize -5<cr>", {})
 
-keymap ("n", "<C-l>", ":vertical resize +5<cr>", {})
-keymap ("n", "<C-Right>", ":vertical resize +5<cr>", {})
+keymap ("n", "<A-l>", ":vertical resize +5<cr>", {})
+keymap ("n", "<A-Right>", ":vertical resize +5<cr>", {})
 
 
 -- Auto Pairs
@@ -46,3 +33,13 @@ inoremap <expr><TAB> pumvisible() ? "\<C-n>" : "\<TAB>"
 inoremap " ""<left>
 inoremap ' ''<left>
 ]])
+
+-- Tmux Navigation Compatibility
+vim.cmd([[
+nnoremap <silent> <C-h> :lua require'nvim-tmux-navigation'.NvimTmuxNavigateLeft()<CR>
+nnoremap <silent> <C-j> :lua require'nvim-tmux-navigation'.NvimTmuxNavigateDown()<CR>
+nnoremap <silent> <C-k> :lua require'nvim-tmux-navigation'.NvimTmuxNavigateUp()<CR>
+nnoremap <silent> <C-l> :lua require'nvim-tmux-navigation'.NvimTmuxNavigateRight()<CR>
+nnoremap <silent> <C-\> :lua require'nvim-tmux-navigation'.NvimTmuxNavigateLastActive()<CR>
+nnoremap <silent> <C-Space> :lua require'nvim-tmux-navigation'.NvimTmuxNavigateNext()<CR>
+]])		

@@ -74,4 +74,6 @@ return packer.startup(function()
 
 	use 'yegappan/mru'
 
+	use 'alexghergh/nvim-tmux-navigation'
+
 end)
