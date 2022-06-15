@@ -20,9 +20,38 @@ return packer.startup(function()
 	-- Package Manager
 	use 'wbthomason/packer.nvim'
 
-	-- File Tree
-	use 'kyazdani42/nvim-tree.lua'
-	  
+        -- Floating terminal windows
+	use {"akinsho/toggleterm.nvim", config = function()
+                require("toggleterm").setup()
+	end}
+
+	-- Custom Status Line
+	use "rebelot/heirline.nvim"
+
+        -- File Manager
+	use(
+	    {
+		"lmburns/lf.nvim",
+		config = function()
+		    vim.g.lg_netrw = 1
+
+		    require("lf").setup(
+			{
+			    escape_quit = false,
+			    border = "rounded",
+			    highlights = {FloatBorder = {guifg = require("kimbox.palette").colors.magenta}}
+			}
+		    )
+
+		    vim.keymap.set("n", "<C-o>", ":Lf<CR>")
+		end,
+		requires = {
+		    "plenary.nvim",
+		    "toggleterm.nvim"
+		}
+	    }
+	)
+
 	-- Tab Bar
 	use {
 		'romgrk/barbar.nvim',
@@ -37,17 +66,6 @@ return packer.startup(function()
 
 	-- Startup Screen
 	use 'goolord/alpha-nvim'
-
-	-- Colour Scheme
-	use {
-		'RRethy/nvim-base16',
-		config = function()
-			vim.cmd('colorscheme base16-tomorrow-night')
-		end
-	}
-
-	-- Status Line styles
-	use "nvim-lualine/lualine.nvim"
 
 	-- Git Icons
 	use {
@@ -70,10 +88,15 @@ return packer.startup(function()
 	-- Smooth Scrolling
 	use 'karb94/neoscroll.nvim'
 
-	use 'nvim-lua/plenary.nvim'
+        use 'nvim-lua/plenary.nvim'
 
 	use 'yegappan/mru'
 
 	use 'alexghergh/nvim-tmux-navigation'
+
+	use({
+                "catppuccin/nvim",
+		as = "catppuccin"
+	})
 
 end)
