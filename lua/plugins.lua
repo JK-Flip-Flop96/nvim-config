@@ -69,10 +69,10 @@ return packer.startup(function()
 
 	-- Git Icons
 	use {
-		'lewis6991/gitsigns.nvim',
-		config = function()
-		  	require('gitsigns').setup()
-		end
+	    'lewis6991/gitsigns.nvim',
+	    config = function()
+	        require('gitsigns').setup()
+	    end
 	}
 
 	-- Startup performance enhancement
@@ -98,5 +98,12 @@ return packer.startup(function()
                 "catppuccin/nvim",
 		as = "catppuccin"
 	})
+
+	use{
+	    'norcalli/nvim-colorizer.lua',
+	    config = function()
+		require('colorizer').setup()
+	    end
+	}
 
 end)
