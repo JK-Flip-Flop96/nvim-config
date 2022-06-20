@@ -28,30 +28,6 @@ return packer.startup(function()
 	-- Custom Status Line
 	use "rebelot/heirline.nvim"
 
-        -- File Manager
-	use(
-	    {
-		"lmburns/lf.nvim",
-		config = function()
-		    vim.g.lg_netrw = 1
-
-		    require("lf").setup(
-			{
-			    escape_quit = false,
-			    border = "rounded",
-			    highlights = {FloatBorder = {guifg = require("kimbox.palette").colors.magenta}}
-			}
-		    )
-
-		    vim.keymap.set("n", "<C-o>", ":Lf<CR>")
-		end,
-		requires = {
-		    "plenary.nvim",
-		    "toggleterm.nvim"
-		}
-	    }
-	)
-
 	-- Tab Bar
 	use {
 		'romgrk/barbar.nvim',
@@ -79,8 +55,11 @@ return packer.startup(function()
 	use "lewis6991/impatient.nvim"
 
 	-- Completions
-	use "hrsh7th/nvim-cmp" -- Base plugin
+	use "neovim/nvim-lspconfig" -- LSP configs for Nvim
+	use "williamboman/nvim-lsp-installer" -- Installer for LSPs
   	use "L3MON4D3/LuaSnip" -- Snippets
+	use "hrsh7th/nvim-cmp" -- Base plugin
+	use "saadparwaiz1/cmp_luasnip"
 
 	-- Indent markers
 	use "lukas-reineke/indent-blankline.nvim"

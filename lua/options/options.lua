@@ -8,7 +8,8 @@ set.titlestring = "NeoVim"
 set.title = true
 
 -- Command Line
-set.cmdheight = 1
+set.cmdheight = 0
+set.showmode = false
 
 -- EDITOR
 

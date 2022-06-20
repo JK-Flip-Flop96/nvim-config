@@ -19,21 +19,6 @@ keymap ("n", "<A-Down>", ":resize -5<cr>", {})
 keymap ("n", "<A-l>", ":vertical resize +5<cr>", {})
 keymap ("n", "<A-Right>", ":vertical resize +5<cr>", {})
 
-
--- Auto Pairs
-vim.cmd([[
-inoremap ( ()<left>
-inoremap [ []<left>
-inoremap { {}<left>
-inoremap {<CR> {<CR>}<ESC>0
-inoremap {;<CR> {<CR>};<ESC>0
-nnoremap <Leader>o o<Esc>^Da
-nnoremap <Leader>O O<Esc>^Da
-inoremap <expr><TAB> pumvisible() ? "\<C-n>" : "\<TAB>"
-inoremap " ""<left>
-inoremap ' ''<left>
-]])
-
 -- Tmux Navigation Compatibility
 vim.cmd([[
 nnoremap <silent> <C-h> :lua require'nvim-tmux-navigation'.NvimTmuxNavigateLeft()<CR>

@@ -1,5 +1,9 @@
 -- Custom Configuration for Heirline
 
+-- Load Heirline's utilities
+local conditions = require("heirline.conditions")
+local utils = require("heirline.utils")
+
 -- Mode Indicator - Modified from the Heirline Cookbook
 local ViMode = {
     init = function(self)
@@ -45,7 +49,7 @@ local ViMode = {
 	    rm = "M",
 	    ["r?"] = "?",
 	    ["!"] = "!",
-	    t = "T",
+	    t = "TERMINAL",
 	},
 	mode_colors = {
 	    n = {"#89b4fe", "#1e1e2e"},
@@ -82,9 +86,24 @@ local ViMode = {
     update = "ModeChanged"
 }
 
+-- Get the cwd and add it to the statusline. 
+local WorkDir = {
+    provider = function()
+	local icon = (vim.fn.haslocaldir(0) == 1 and " l" or " g") .. " " .. " "
+	local cwd = vim.fn.getcwd(0)
+	cwd = vim.fn.fnamemodify(cwd, ":~")
+	if not conditions.width_percent_below(#cwd, 0.25) then
+	    cwd = vim.fn.pathshorten(cwd)
+	end
+	local trail = cwd:sub(-1) == '/' and ' ' or "/ "
+	return icon .. cwd .. trail
+    end,
+    hl = { fg = "#f9e2af", bg = "#313244", bold = false },
+}
+
 -- Build out the status line
 local statusline = {
-    ViMode,    
+    ViMode, WorkDir
 }
 
 require'heirline'.setup(statusline)
