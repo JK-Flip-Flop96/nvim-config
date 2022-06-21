@@ -57,7 +57,7 @@ local function file_button(fn, sc, short_fn)
     else
         ico_txt = ""
     end
-    local file_button_el = dashboard.button(sc, ico_txt .. short_fn, "<cmd>e " .. fn .. " <CR>")
+    local file_button_el = dashboard.button(sc, ico_txt .. short_fn, ":set laststatus=3 | :e " .. fn .. " <CR>")
     local fn_start = short_fn:match(".*[/\\]")
     if fn_start ~= nil then
         table.insert(fb_hl, { "Comment", #ico_txt - 2, #fn_start + #ico_txt })
