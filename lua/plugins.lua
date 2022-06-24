@@ -57,9 +57,17 @@ return packer.startup(function()
 	-- Completions
 	use "neovim/nvim-lspconfig" -- LSP configs for Nvim
 	use "williamboman/nvim-lsp-installer" -- Installer for LSPs
-  	use "L3MON4D3/LuaSnip" -- Snippets
-	use "hrsh7th/nvim-cmp" -- Base plugin
-	use "saadparwaiz1/cmp_luasnip"
+	
+	-- Completion Sources
+	use "hrsh7th/cmp-buffer" -- Completions for words in the buffer
+	use "hrsh7th/cmp-path" -- Completions for filesystem paths
+	use "hrsh7th/cmp-cmdline" -- Completions for vim's command line
+	use "octaltree/cmp-look" -- Look-based work lookupp
+	use "hrsh7th/nvim-cmp" -- Completions plugin
+
+	-- LuaSnip
+	use "L3MON4D3/LuaSnip" -- Snippets
+	use "saadparwaiz1/cmp_luasnip" -- Cmp/LuaSnip Compatability
 
 	-- Indent markers
 	use "lukas-reineke/indent-blankline.nvim"
