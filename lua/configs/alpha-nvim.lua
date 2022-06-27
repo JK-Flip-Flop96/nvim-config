@@ -1,15 +1,19 @@
+-- Load and Ready Alpha.nvim
 local status_ok, alpha = pcall(require, "alpha")
 if not status_ok then
 	return
 end
 
+-- Load and Ready Plenary
 local path_ok, plenary_path = pcall(require, "plenary.path")
 if not path_ok then
     return
 end
 
+-- Get Alpha's Dashboard theme
 local dashboard = require("alpha.themes.dashboard")
 
+-- Remove the tildas after the buffer
 vim.opt.fillchars:append { eob = " " }
 
 vim.cmd [[ au User AlphaReady if winnr('$') == 1 | set laststatus=1 ]]
@@ -22,6 +26,7 @@ local nvim_web_devicons = {
     highlight = true,
 }
 
+-- Get the file extension for a given file
 local function get_extension(fn)
     local match = fn:match("^.+(%..+)$")
     local ext = ""
@@ -31,12 +36,14 @@ local function get_extension(fn)
     return ext
 end
 
+-- Get the icon nwd for a given file name
 local function icon(fn)
     local nwd = require("nvim-web-devicons")
     local ext = get_extension(fn)
     return nwd.get_icon(fn, ext, { default = true })
 end
 
+-- Generate a button for a given file
 local function file_button(fn, sc, short_fn)
     short_fn = short_fn or fn
     local ico_txt
@@ -66,6 +73,7 @@ local function file_button(fn, sc, short_fn)
     return file_button_el
 end
 
+-- Remove gitcommit message buffers from the MRU list
 local default_mru_ignore = { "gitcommit" }
 
 local mru_opts = {
@@ -127,8 +135,7 @@ local function mru(start, cwd, items_number, opts)
     }
 end
 
-
-
+-- Set the Ascii Art used in the Header
 dashboard.section.header.val = {
     [[__/\\\\\_____/\\\___________________________________________________________________________        ]],
     [[ _\/\\\\\\___\/\\\___________________________________________________________________________       ]],
@@ -165,6 +172,7 @@ local section_mru = {
     }
 }
 
+-- Denfine the Buttons in the "quick actions" section
 local buttons = {
     type = "group",
     val = {
@@ -178,12 +186,12 @@ local buttons = {
     position = "center"
 }
 
-
+-- Define the Footer
 dashboard.section.footer.val = {
     "Config by Stuart Miller 2022",
 }
 
--- Layout For Luavim ascii art
+-- Define the order and position of elements on the screen
 dashboard.config.layout = {
     { type = "padding", val = 5 },
     dashboard.section.header,
