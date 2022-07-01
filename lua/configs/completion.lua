@@ -86,5 +86,26 @@ cmp.setup {
     sources = cmp.config.sources({
 	{ name = "nvim_lsp" },
 	{ name = "luasnip" },
+	{ name = "look" },
+	{ name = "path" },
+	{ name = "buffer" },
+	{ name = "cmdline" },
     }),
 }
+
+cmp.setup.filetype('gitcommit', {
+    sources = cmp.config.sources({
+	{ name = cmp_git },
+    }, {
+	{ name = 'buffer'},
+    })
+})
+
+cmp.setup.cmdline(":", {
+    mapping = cmp.mapping.preset.cmdline(),
+    sources = cmp.config.sources({
+	{ name = 'path' }
+    }, {
+	{ name = 'cmdline' }
+    })
+})

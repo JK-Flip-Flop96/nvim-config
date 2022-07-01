@@ -62,9 +62,9 @@ return packer.startup(function()
 	use "hrsh7th/cmp-buffer" -- Completions for words in the buffer
 	use "hrsh7th/cmp-path" -- Completions for filesystem paths
 	use "hrsh7th/cmp-cmdline" -- Completions for vim's command line
-	use "octaltree/cmp-look" -- Look-based work lookupp
+	use "octaltree/cmp-look" -- Look-based word lookupp
+	use "petertriho/cmp-git" -- Completions for Git
 	use "hrsh7th/nvim-cmp" -- Completions plugin
-
 	-- LuaSnip
 	use "L3MON4D3/LuaSnip" -- Snippets
 	use "saadparwaiz1/cmp_luasnip" -- Cmp/LuaSnip Compatability
