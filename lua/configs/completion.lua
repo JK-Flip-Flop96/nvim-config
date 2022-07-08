@@ -127,4 +127,4 @@ require("nvim-lsp-installer").setup({
 
 -- LSP servers
 
-
+require("lspconfig").pyright.setup{}
