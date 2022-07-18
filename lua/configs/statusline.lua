@@ -101,9 +101,14 @@ local WorkDir = {
     hl = { fg = "#f9e2af", bg = "#313244", bold = false },
 }
 
+-- Basic Ruler
+local Ruler = {
+    provider = "%7(%1/%3L%):%2c %P",
+}
+
 -- Build out the status line
 local statusline = {
-    ViMode, WorkDir
+    ViMode, WorkDir, { provider = "%=" }, Ruler
 }
 
 require'heirline'.setup(statusline)
