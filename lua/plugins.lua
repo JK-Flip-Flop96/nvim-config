@@ -51,13 +51,13 @@ return packer.startup(function()
 	    end
 	}
 
-	-- Startup performance enhancement
+	-- Startup performance "enhancement
 	use "lewis6991/impatient.nvim"
 
 	-- Completions
 	use "neovim/nvim-lspconfig" -- LSP configs for Nvim
 	use "williamboman/nvim-lsp-installer" -- Installer for LSPs
-	
+
 	-- Completion Sources
 	use "hrsh7th/cmp-nvim-lsp" -- Completions from LSPs
 	use "hrsh7th/cmp-buffer" -- Completions for words in the buffer
@@ -66,18 +66,32 @@ return packer.startup(function()
 	use "octaltree/cmp-look" -- Look-based word lookupp
 	use "petertriho/cmp-git" -- Completions for Git
 	use "hrsh7th/nvim-cmp" -- Completions plugin
+
 	-- LuaSnip
 	use "L3MON4D3/LuaSnip" -- Snippets
 	use "saadparwaiz1/cmp_luasnip" -- Cmp/LuaSnip Compatability
 
+	-- GitHub Co-Pilot
+	--use "github/copilot.vim" -- Main Co-Pilot Plugin - Only enable if you want to configure the Co-Pilot Plugin
+	use {
+	    "zbirenbaum/copilot.lua", -- Pure lua replacement for copilot.vim
+	    event = {"VimEnter"},
+	    config = function ()
+	    	vim.defer_fn(function ()
+	    	    require("copilot").setup()
+	    	end, 100)
+	    end,
+	}
+	use "zbirenbaum/copilot-cmp" -- Adds copilot as a Completions source
+
+
 	-- Indent markers
 	use "lukas-reineke/indent-blankline.nvim"
-	
+
 	-- Smooth Scrolling
 	use 'karb94/neoscroll.nvim'
 
         use 'nvim-lua/plenary.nvim'
-
 	use 'yegappan/mru'
 
 	use 'alexghergh/nvim-tmux-navigation'

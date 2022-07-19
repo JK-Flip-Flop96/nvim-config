@@ -84,6 +84,7 @@ cmp.setup {
     },
     -- Cmp Sources
     sources = cmp.config.sources({
+	{ name = "copilot" },
 	{ name = "nvim_lsp" },
 	{ name = "luasnip" },
 	{ name = "look" },
@@ -91,6 +92,11 @@ cmp.setup {
 	{ name = "buffer" },
 	{ name = "cmdline" },
     }),
+
+    -- Cmp Experimental Features
+    experimental = {
+	ghost_text = true
+    },
 }
 
 cmp.setup.filetype('gitcommit', {
