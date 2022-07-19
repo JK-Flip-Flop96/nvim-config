@@ -59,6 +59,7 @@ return packer.startup(function()
 	use "williamboman/nvim-lsp-installer" -- Installer for LSPs
 	
 	-- Completion Sources
+	use "hrsh7th/cmp-nvim-lsp" -- Completions from LSPs
 	use "hrsh7th/cmp-buffer" -- Completions for words in the buffer
 	use "hrsh7th/cmp-path" -- Completions for filesystem paths
 	use "hrsh7th/cmp-cmdline" -- Completions for vim's command line

@@ -95,7 +95,7 @@ cmp.setup {
 
 cmp.setup.filetype('gitcommit', {
     sources = cmp.config.sources({
-	{ name = cmp_git },
+	{ name = 'cmp_git' },
     }, {
 	{ name = 'buffer'},
     })
@@ -126,5 +126,14 @@ require("nvim-lsp-installer").setup({
 })
 
 -- LSP servers
+local capabilities = require('cmp_nvim_lsp').update_capabilities(vim.lsp.protocol.make_client_capabilities())
 
-require("lspconfig").pyright.setup{}
+-- pyright
+require("lspconfig").pyright.setup{
+    capabilities = capabilities
+}
+
+-- sumneko lua 
+require('lspconfig').sumneko_lua.setup{
+    capabilities = capabilities
+}
