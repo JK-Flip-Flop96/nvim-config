@@ -9,7 +9,7 @@ vim.opt.list = true
 vim.opt.listchars:append("space: ")
 
 -- indent-blankline options
-require("indent_blankline").setup {
+indent_blankline.setup {
     space_char_blankline = " ",
     show_end_of_line = false,
     show_current_context = true,
