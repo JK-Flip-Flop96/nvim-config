@@ -104,7 +104,7 @@ local WorkDir = {
 -- Basic Ruler
 local Ruler = {
     provider = " Ln %l/%L Cl %c %P ",
-    hl = { bg = "#313244"}
+    hl = { fg ="#a6adc8", bg = "#313244"}
 }
 
 -- Build out the status line
