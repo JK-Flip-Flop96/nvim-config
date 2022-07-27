@@ -56,7 +56,7 @@ return packer.startup(function()
 
 	-- Completions
 	use "neovim/nvim-lspconfig" -- LSP configs for Nvim
-	use "williamboman/nvim-lsp-installer" -- Installer for LSPs
+	use "williamboman/mason.nvim" -- Installer for LSPs
 
 	-- Completion Sources
 	use "hrsh7th/cmp-nvim-lsp" -- Completions from LSPs

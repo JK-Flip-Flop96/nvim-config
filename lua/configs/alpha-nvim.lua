@@ -181,7 +181,7 @@ local buttons = {
         dashboard.button("n", "  New File",       ":set laststatus=3 | :ene <BAR> startinsert <CR>"),
         dashboard.button("v", "  Neovim Settings ",      ":set laststatus=3 | e ~/.config/nvim/init.lua <CR>"),
         dashboard.button("u", "  Update Nvim Plugins",   ":PackerUpdate <CR>"),
-	dashboard.button("l", "力 LSP Installer", ":LspInstallInfo <CR>"),
+	dashboard.button("l", "力 Mason", ":Mason <CR>"),
         dashboard.button("q", "  Quit Neovim",           ":qa<CR>"),
     },
     position = "center"
