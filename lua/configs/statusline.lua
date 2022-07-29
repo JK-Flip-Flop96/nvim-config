@@ -107,11 +107,7 @@ local Ruler = {
     hl = { fg ="#a6adc8", bg = "#313244"}
 }
 
-vim.fn.sign_define("DiagnosticSignError", { text = "", texthl = "DiagnosticSignError" })
-vim.fn.sign_define("DiagnosticSignWarn", { text = "", texthl = "DiagnosticSignWarn" })
-vim.fn.sign_define("DiagnosticSignInfo", { text = "", texthl = "DiagnosticSignInfo" })
-vim.fn.sign_define("DiagnosticSignHint", { text = "", texthl = "DiagnosticSignHint" })
-
+-- Diagnostics signs 
 local Diagnostics = {
     consdition = conditions.has_diagnostics,
 

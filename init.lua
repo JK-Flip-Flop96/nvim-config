@@ -4,6 +4,7 @@ require "plugins"
 -- NVim Settings
 require "options/options"
 require "options/keymap"
+require "options/diagnostics"
 
 -- Plugin Config Files
 -- require "configs/file-tree"
