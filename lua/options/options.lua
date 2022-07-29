@@ -11,6 +11,9 @@ set.title = true
 set.cmdheight = 0
 set.showmode = false
 
+-- Sign Column
+set.signcolumn = "yes" -- Prevents bouncing when the signcolumn is enabled/disabled
+
 -- EDITOR
 
 -- Line Numbers

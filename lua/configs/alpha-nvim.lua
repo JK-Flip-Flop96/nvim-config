@@ -179,9 +179,11 @@ local buttons = {
         { type = "text", val = "Quick Actions", opts = { hl = "SpecialComment", position = "center"}},
         { type = "padding", val = 1 },
         dashboard.button("n", "  New File",       ":set laststatus=3 | :ene <BAR> startinsert <CR>"),
+	{ type = "padding", val = 1 },
         dashboard.button("v", "  Neovim Settings ",      ":set laststatus=3 | e ~/.config/nvim/init.lua <CR>"),
         dashboard.button("u", "  Update Nvim Plugins",   ":PackerUpdate <CR>"),
-	dashboard.button("m", "力 Mason Installer", ":Mason <CR>"),
+	dashboard.button("m", "  Mason Installer", ":Mason <CR>"),
+	{ type = "padding", val = 1 },
         dashboard.button("q", "  Quit Neovim",           ":qa<CR>"),
     },
     position = "center"

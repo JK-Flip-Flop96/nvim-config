@@ -58,8 +58,8 @@ cmp.setup {
     mapping = cmp.mapping.preset.insert({
 	["<C-k>"] = cmp.mapping.select_prev_item(),
 	["<C-j"] = cmp.mapping.select_next_item(),
-	["<C-b>"] = cmp.mapping(cmp.mapping.scroll_docs(-1), { "i", "c" }), 
-	["<C-f>"] = cmp.mapping(cmp.mapping.scroll_docs(1), { "i", "c" }), 
+	["<C-b>"] = cmp.mapping(cmp.mapping.scroll_docs(-1), { "i", "c" }),
+	["<C-f>"] = cmp.mapping(cmp.mapping.scroll_docs(1), { "i", "c" }),
 	["<C-Space>"] = cmp.mapping(cmp.mapping.complete(), { "i", "c"}),
 	["<C-y>"] = cmp.config.disable,
 	["<C-e>"] = cmp.mapping {
@@ -77,7 +77,8 @@ cmp.setup {
 
 	    vim_item.menu = ({
 		nvim_lsp = "[LSP]",
-		luasnip = "[Snippet]"
+		luasnip = "[Snippet]",
+		copilot = "[Copilot]",
 	    })[entry.source.name]
 	    return vim_item
 	end,
@@ -119,7 +120,7 @@ cmp.setup.cmdline(":", {
 
 -- LSP SETTINGS
 
--- LSP Installer setup
+-- Mason setup
 require("mason").setup({
     ui = {
 	icons = {
@@ -170,7 +171,15 @@ require('lspconfig').rust_analyzer.setup{
 
 -- sumneko lua 
 require('lspconfig').sumneko_lua.setup{
-    capabilities = capabilities
+    capabilities = capabilities,
+    settings = {
+	Lua = {
+	    -- Ensure that the LSP server recognises the 'vim' global
+	    diagnostics = {
+		globals = { 'vim' },
+	    },
+	}
+    }
 }
 
 -- taplo

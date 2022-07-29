@@ -84,6 +84,12 @@ return packer.startup(function()
 	}
 	use "zbirenbaum/copilot-cmp" -- Adds copilot as a Completions source
 
+	use({
+	    "https://git.sr.ht/~whynothugo/lsp_lines.nvim",
+	    config = function ()
+	    	require("lsp_lines").setup()
+	    end
+	})
 
 	-- Indent markers
 	use "lukas-reineke/indent-blankline.nvim"
