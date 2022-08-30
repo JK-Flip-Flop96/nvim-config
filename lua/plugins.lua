@@ -14,7 +14,7 @@ packer.init {
 		end,
 	},
 }
-  
+
 -- Install Plugins
 return packer.startup(function()
 	-- Package Manager
@@ -77,13 +77,14 @@ return packer.startup(function()
 	    "zbirenbaum/copilot.lua", -- Pure lua replacement for copilot.vim
 	    event = {"VimEnter"},
 	    config = function ()
-	    	vim.defer_fn(function ()
+	    	vim.defer_fn(function () -- Defer loading Copilot until nvim has already started
 	    	    require("copilot").setup()
 	    	end, 100)
 	    end,
 	}
 	use "zbirenbaum/copilot-cmp" -- Adds copilot as a Completions source
 
+	-- LSP Diagnostic Information printed on seperate lines
 	use({
 	    "https://git.sr.ht/~whynothugo/lsp_lines.nvim",
 	    config = function ()
@@ -97,16 +98,19 @@ return packer.startup(function()
 	-- Smooth Scrolling
 	use 'karb94/neoscroll.nvim'
 
+	-- Path Manipulation
         use 'nvim-lua/plenary.nvim'
 	use 'yegappan/mru'
 
 	use 'alexghergh/nvim-tmux-navigation'
 
+	-- Colour Scheme
 	use({
                 "catppuccin/nvim",
 		as = "catppuccin"
 	})
 
+	-- Colour code highlighting 
 	use{
 	    'norcalli/nvim-colorizer.lua',
 	    config = function()
