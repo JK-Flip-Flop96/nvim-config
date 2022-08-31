@@ -123,12 +123,15 @@ local Diagnostics = {
     	self.warnings = #vim.diagnostic.get(0, { severity = vim.diagnostic.severity.WARN })
     	self.hints = #vim.diagnostic.get(0, { severity = vim.diagnostic.severity.HINT })
     	self.info = #vim.diagnostic.get(0, { severity = vim.diagnostic.severity.INFO })
+	self.total = self.errors + self.warnings + self.hints + self.info
     end,
 
     update = { "DiagnosticChanged", "BufEnter" },
 
     {
-	provider = " ",
+	provider = function (self)
+	    return self.total > 0 and " "
+	end,
 	hl = { bg = "#45475a" },
     },
     {
@@ -156,7 +159,9 @@ local Diagnostics = {
 	hl = { fg = "#94e2d5", bg = "#45475a" },
     },
     {
-	provider = " ",
+	provider = function (self)
+	    return self.total > 0 and " "
+	end,
 	hl = { bg = "#45475a" },
     },
 }

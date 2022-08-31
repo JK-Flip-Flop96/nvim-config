@@ -24,6 +24,9 @@ set.relativenumber = true
 set.shiftwidth = 4
 set.showtabline = 1
 
+-- Scrolling
+set.scrolloff = 5
+
 -- SEARCH FUNCTIONS
 
 -- Search Highlighting
