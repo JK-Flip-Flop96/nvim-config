@@ -20,12 +20,16 @@ set.signcolumn = "yes" -- Prevents bouncing when the signcolumn is enabled/disab
 set.number = true
 set.relativenumber = true
 
--- TabWidth
+-- Tab Width
 set.shiftwidth = 4
 set.showtabline = 1
 
--- Scrolling
-set.scrolloff = 5
+-- Indent to the next tabstop automatically
+set.smarttab = true
+
+-- Keep extra line on screen when scrolling to provide context
+set.scrolloff = 5 -- Vertical
+set.sidescrolloff = 5 -- Horizontal
 
 -- SEARCH FUNCTIONS
 
