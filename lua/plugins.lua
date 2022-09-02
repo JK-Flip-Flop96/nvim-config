@@ -28,12 +28,6 @@ return packer.startup(function()
 	-- Custom Status Line
 	use "rebelot/heirline.nvim"
 
-	-- Tab Bar
-	use {
-		'romgrk/barbar.nvim',
-		requires = {'kyazdani42/nvim-web-devicons'}
-	}
-
 	-- Tree Sitter
 	use {
 		'nvim-treesitter/nvim-treesitter',
