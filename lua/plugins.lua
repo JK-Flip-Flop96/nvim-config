@@ -20,6 +20,8 @@ return packer.startup(function()
 	-- Package Manager
 	use 'wbthomason/packer.nvim'
 
+	use 'kyazdani42/nvim-web-devicons'
+
         -- Floating terminal windows
 	use {"akinsho/toggleterm.nvim", config = function()
                 require("toggleterm").setup()
