@@ -14,6 +14,7 @@ local ViMode = {
 	end
     end,
 
+    -- Define the text used in each mode
     static = {
 	mode_names = {
 	    n = "NORMAL",
@@ -51,6 +52,7 @@ local ViMode = {
 	    ["!"] = "!",
 	    t = "TERMINAL",
 	},
+	-- Define the color used in each mode
 	mode_colors = {
 	    n = {"#89b4fe", "#1e1e2e"},
 	    i = {"#a6e3a1", "#1e1e2e"},
@@ -68,10 +70,12 @@ local ViMode = {
 	}
     },
 
+    -- Define the layout of the indicator
     provider = function(self)
 	return " %2("..self.mode_names[self.mode].." %)"
     end,
 
+    -- Define the colours of the indicator
     hl = function(self)
 	-- Get the first chatacter of the mode
 	local mode = self.mode:sub(1, 1)
@@ -83,6 +87,7 @@ local ViMode = {
 	return {bg = m_colors[1], fg = m_colors[2], }
     end,
 
+    -- Update when the vim mode changes
     update = "ModeChanged"
 }
 
@@ -109,8 +114,10 @@ local Ruler = {
 
 -- Diagnostics signs 
 local Diagnostics = {
+    -- Only display this component if diagnostics are available for the current buffer
     consdition = conditions.has_diagnostics,
 
+    -- Get the icons for the diagnostics
     static = {
 	error_icon = vim.fn.sign_getdefined("DiagnosticSignError")[1].text,
 	warn_icon = vim.fn.sign_getdefined("DiagnosticSignWarn")[1].text,
@@ -118,6 +125,7 @@ local Diagnostics = {
 	hint_icon = vim.fn.sign_getdefined("DiagnosticSignHint")[1].text,
     },
 
+    -- Get the counts for each type of diagnostic message
     init = function (self)
     	self.errors = #vim.diagnostic.get(0, { severity = vim.diagnostic.severity.ERROR })
     	self.warnings = #vim.diagnostic.get(0, { severity = vim.diagnostic.severity.WARN })
@@ -126,39 +134,47 @@ local Diagnostics = {
 	self.total = self.errors + self.warnings + self.hints + self.info
     end,
 
+    -- Update when the diagnostics change or when entering a new buffer
     update = { "DiagnosticChanged", "BufEnter" },
 
+    -- Define the text to display
     {
+	-- Leading space
 	provider = function (self)
 	    return self.total > 0 and " "
 	end,
 	hl = { bg = "#45475a" },
     },
     {
+	-- Errors
 	provider = function (self)
 	    return self.errors > 0 and (self.error_icon .. self.errors .. " ")
 	end,
 	hl = { fg = "#f38ba8", bg = "#45475a" },
     },
     {
+	-- Warnings
 	provider = function (self)
 	    return self.warnings > 0 and (self.warn_icon .. self.warnings .. " ")
 	end,
 	hl = { fg = "#f9e2af", bg = "#45475a" },
     },
     {
+	-- Info
 	provider = function (self)
 	    return self.info > 0 and (self.info_icon .. self.info .. " ")
 	end,
 	hl = { fg = "#89b4fa", bg = "#45475a" },
     },
     {
+	-- Hints
 	provider = function (self)
 	    return self.hints > 0 and (self.hint_icon .. self.hints)
 	end,
 	hl = { fg = "#94e2d5", bg = "#45475a" },
     },
     {
+	-- Trailing space
 	provider = function (self)
 	    return self.total > 0 and " "
 	end,
@@ -171,4 +187,5 @@ local statusline = {
     ViMode, WorkDir, Diagnostics, { provider = "%=" }, Ruler
 }
 
+-- Set the statusline
 require'heirline'.setup(statusline)
