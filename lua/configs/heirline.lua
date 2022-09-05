@@ -1,5 +1,7 @@
 -- Custom Configuration for Heirline
 
+-- ## STATUS LINE COMPONENTS ## ==
+
 -- Load Heirline's utilities
 local conditions = require("heirline.conditions")
 local utils = require("heirline.utils")
@@ -187,5 +189,15 @@ local statusline = {
     ViMode, WorkDir, Diagnostics, { provider = "%=" }, Ruler
 }
 
+-- ## WINBAR ## --
+
+-- Build out the winbar
+local winbar = { }
+
+-- ## TABLINE ## --
+
+-- Build out the tabline
+local tabline = { }
+
 -- Set the statusline
-require'heirline'.setup(statusline)
+require'heirline'.setup(statusline, winbar, tabline)
