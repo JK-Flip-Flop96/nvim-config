@@ -204,7 +204,7 @@ local FileIcon = {
 	local filename = self.filename
 	local extension = vim.fn.fnamemodify(filename, ":e")
 
-	self.icon, self.icon_color = require("nvim-web-devicons").get_icon(filename, extension, { default = true })
+	self.icon, self.icon_color = require("nvim-web-devicons").get_icon_color(filename, extension, { default = true })
     end,
     provider = function(self)
 	return self.icon and (self.icon .. " ")
@@ -231,7 +231,7 @@ local TablineBufnr = {
     provicer = function(self)
 	return tostring(self.bufnr) .. ": "
     end,
-    hl = "Comment",
+    hl = { fg = "#a6adc8" },
 }
 
 -- Get the file's name 
@@ -255,7 +255,7 @@ local TablineFileFlags = {
 		return ""
 	    end
 	end,
-	hl = { fg = "green" }
+	hl = { fg = "#a6e3a1" }
     },
     {
 	provider = function(self)
@@ -263,7 +263,7 @@ local TablineFileFlags = {
 		return ""
 	    end
 	end,
-	hl = { fg = "orange" },
+	hl = { fg = "#fab387" },
     },
 }
 
@@ -307,7 +307,7 @@ local TablineCloseButton = {
     { provider = " " },
     {
 	provider = "",
-        hl = { fg = "grey" },
+        hl = { fg = "#a6adc8" },
 	on_click = {
 	    callback = function(_, minwid)
 		vim.api.nvim_buf_delete(minwid, { force = false })
@@ -323,9 +323,9 @@ local TablineCloseButton = {
 -- Construct the final buffer block
 local TablineBufferBlock = utils.surround({ "", "" }, function(self)
     if self.is_active then
-	return utils.get_highlight("TabLineSel")
+	return utils.get_highlight("TabLineSel").bg
     else
-	return utils.get_highlight("TabLine")
+	return utils.get_highlight("TabLine").bg
     end
 end, { TablineFileNameBlock, TablineCloseButton })
 
@@ -333,12 +333,12 @@ end, { TablineFileNameBlock, TablineCloseButton })
 local BufferLine = utils.make_buflist(
     TablineBufferBlock,
     -- Define the icons used for left/right truncation
-    { provicer = "", hl = { fg = "gray" }},
-    { provicer = "", hl = { fg = "gray" }}
+    { provicer = "", hl = { fg = "#a6adc8" }},
+    { provicer = "", hl = { fg = "#a6adc8" }}
 )
 
 -- Build out the tabline
-local tabline = { }
+local tabline = { BufferLine }
 
 -- Set the statusline
 require'heirline'.setup(statusline, winbar, tabline)
