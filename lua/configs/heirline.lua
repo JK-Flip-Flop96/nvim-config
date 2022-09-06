@@ -184,6 +184,23 @@ local Diagnostics = {
     },
 }
 
+-- File Type/Info 
+
+local FileIcon = {
+    init = function(self)
+	local filename = self.filename
+	local extension = vim.fn.fnamemodify(filename, ":e")
+
+	self.icon, self.icon_color = require("nvim-web-devicons").get_icon(filename, extension, { default = true })
+    end,
+    provider = function(self)
+	return self.icon and (self.icon .. " ")
+    end,
+    hl = function(self)
+	return { fg = self.icon_color }
+    end
+}
+
 -- Build out the status line
 local statusline = {
     ViMode, WorkDir, Diagnostics, { provider = "%=" }, Ruler
@@ -195,6 +212,117 @@ local statusline = {
 local winbar = { }
 
 -- ## TABLINE ## --
+
+-- Get the number of the buffer
+local TablineBufnr = {
+    provicer = function(self)
+	return tostring(self.bufnr) .. ": "
+    end,
+    hl = "Comment",
+}
+
+-- Get the file's name 
+local TablineFileName = {
+    provider = function(self)
+	local filename = self.filename
+	filename = filename == "" and "[No Name]" or vim.fn.fnamemodify(filename, ":t")
+	return filename
+    end,
+    -- Bold the text if the buffer is visible 
+    hl = function (self)
+	return { bold = self.is_active or self.is_visible }
+    end,
+}
+
+-- Add additional icons to the block based on the file's flags
+local TablineFileFlags = {
+    {
+	provider = function(self)
+	    if vim.bo[self.bufnr].modified then
+		return ""
+	    end
+	end,
+	hl = { fg = "green" }
+    },
+    {
+	provider = function(self)
+	    if not vim.bo[self.bufnr].modifiable or vim.bo[self.bufnr].readonly then
+		return ""
+	    end
+	end,
+	hl = { fg = "orange" },
+    },
+}
+
+-- Construct the final fila name block
+local TablineFileNameBlock = {
+    -- Get the file's name on initialisation
+    init = function(self)
+	self.filename = vim.api.nvim_buf_get_name(self.bufnr)
+    end,
+    hl = function(self)
+	if self.is_active then
+	    return "TabLineSel"
+	else
+	    return "TabLine"
+	end
+    end,
+    on_click = {
+	callback = function(_, minwid, _, button)
+	    if (button == "m") then
+		vim.api.nvim_buf_delete(minwid, { force = false })
+	    else
+		vim.api.nvim_win_set_buf(0, minwid)
+	    end
+	end,
+	minwid = function(self)
+	    return self.bufnr
+	end,
+	name = "heirline_tabline_buffer_callback"
+    },
+    TablineBufnr,
+    FileIcon,
+    TablineFileName,
+    TablineFileFlags,
+}
+
+-- Add a close button to the buffer block
+local TablineCloseButton = {
+    condition = function (self)
+        return not vim.bo[self.bufnr].modified
+    end,
+    { provider = " " },
+    {
+	provider = "",
+        hl = { fg = "grey" },
+	on_click = {
+	    callback = function(_, minwid)
+		vim.api.nvim_buf_delete(minwid, { force = false })
+	    end,
+	    minwid = function(self)
+		return self.bufnr
+	    end,
+	    name = "heirline_tabline_close_buffer_callback",
+	},
+    },
+}
+
+-- Construct the final buffer block
+local TablineBufferBlock = utils.surround({ "", "" }, function(self)
+    if self.is_active then
+	return utils.get_highlight("TabLineSel")
+    else
+	return utils.get_highlight("TabLine")
+    end
+end, { TablineFileNameBlock, TablineCloseButton })
+
+-- Construct the bufferline using the elements defined above
+local BufferLine = utils.make_buflist(
+    TablineBufferBlock,
+    -- Define the icons used for left/right truncation
+    { provicer = "", hl = { fg = "gray" }},
+    { provicer = "", hl = { fg = "gray" }}
+)
 
 -- Build out the tabline
 local tabline = { }
