@@ -96,15 +96,28 @@ local ViMode = {
 -- Get the cwd and add it to the statusline. 
 local WorkDir = {
     provider = function()
+	-- Prepend a 'g' for a global working directory or an 'l' for a local working directory
 	local icon = (vim.fn.haslocaldir(0) == 1 and " l" or " g") .. " " .. " "
+
+	-- Get the current working directory
 	local cwd = vim.fn.getcwd(0)
+
+	-- Shorten the cwd relative to the home dir if appropriate
 	cwd = vim.fn.fnamemodify(cwd, ":~")
+
+	-- Shorten the cwd if it's too long
 	if not conditions.width_percent_below(#cwd, 0.25) then
 	    cwd = vim.fn.pathshorten(cwd)
 	end
+
+	-- Add a trailing space and a slash if there isn't one
 	local trail = cwd:sub(-1) == '/' and ' ' or "/ "
+
+	-- Concatonate the icon and cwd
 	return icon .. cwd .. trail
     end,
+
+    -- Set the colour
     hl = { fg = "#a6adc8", bg = "#313244", bold = false },
 }
 
