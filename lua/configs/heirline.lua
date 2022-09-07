@@ -228,7 +228,7 @@ local winbar = { }
 
 -- Get the number of the buffer
 local TablineBufnr = {
-    provicer = function(self)
+    provider = function(self)
 	return tostring(self.bufnr) .. ": "
     end,
     hl = { fg = "#a6adc8" },
@@ -252,7 +252,7 @@ local TablineFileFlags = {
     {
 	provider = function(self)
 	    if vim.bo[self.bufnr].modified then
-		return ""
+		return " "
 	    end
 	end,
 	hl = { fg = "#a6e3a1" }
@@ -260,7 +260,7 @@ local TablineFileFlags = {
     {
 	provider = function(self)
 	    if not vim.bo[self.bufnr].modifiable or vim.bo[self.bufnr].readonly then
-		return ""
+		return " "
 	    end
 	end,
 	hl = { fg = "#fab387" },
@@ -307,27 +307,50 @@ local TablineCloseButton = {
     { provider = " " },
     {
 	provider = "",
-        hl = { fg = "#a6adc8" },
 	on_click = {
 	    callback = function(_, minwid)
 		vim.api.nvim_buf_delete(minwid, { force = false })
 	    end,
+
 	    minwid = function(self)
 		return self.bufnr
 	    end,
 	    name = "heirline_tabline_close_buffer_callback",
 	},
     },
+    hl = function(self)
+	if self.is_active then
+	    return "TabLineSel"
+	else
+	    return "TabLine"
+	end
+    end,
+}
+
+local TablineBufferBlockLeft = {
+    provider = "▎",
+    hl = function(self)
+	if self.is_active then
+	    return { bg = utils.get_highlight("TablineSel").bg, fg = utils.get_highlight("TablineFill").bg }
+	else
+	    return { bg = utils.get_highlight("Tabline").bg, fg = utils.get_highlight("TablineFill").bg }
+	end
+    end,
+}
+
+local TablineBufferBlockRight = {
+    provider = "▊",
+    hl = function(self)
+	if self.is_active then
+	    return { bg = utils.get_highlight("TablineFill").bg, fg = utils.get_highlight("TablineSel").bg }
+	else
+	    return { bg = utils.get_highlight("TablineFill").bg, fg = utils.get_highlight("Tabline").bg }
+	end
+    end,
 }
 
 -- Construct the final buffer block
-local TablineBufferBlock = utils.surround({ "", "" }, function(self)
-    if self.is_active then
-	return utils.get_highlight("TabLineSel").bg
-    else
-	return utils.get_highlight("TabLine").bg
-    end
-end, { TablineFileNameBlock, TablineCloseButton })
+local TablineBufferBlock = { TablineBufferBlockLeft, TablineFileNameBlock, TablineCloseButton, TablineBufferBlockRight }
 
 -- Construct the bufferline using the elements defined above
 local BufferLine = utils.make_buflist(
@@ -337,8 +360,35 @@ local BufferLine = utils.make_buflist(
     { provicer = "", hl = { fg = "#a6adc8" }}
 )
 
+local TabPage = {
+    provider = function(self)
+	return "%" .. self.tabnr .. "T " .. self.tabnr .. " %T"
+    end,
+    hl = function(self)
+	if not self.is_active then
+	    return "TabLine"
+	else
+	    return "TabLineSel"
+	end
+    end,
+}
+
+local TabPageClose = {
+    provider = "%999X  %X",
+    hl = "TabLine",
+}
+
+local TabPages = {
+    condition = function()
+	return #vim.api.nvim_list_tabpages() >= 2
+    end,
+    { provider = "%=" }, -- Make this component right justified
+    utils.make_tablist(TabPage),
+    TabPageClose,
+}
+
 -- Build out the tabline
-local tabline = { BufferLine }
+local tabline = { BufferLine, TabPages }
 
 -- Set the statusline
 require'heirline'.setup(statusline, winbar, tabline)
