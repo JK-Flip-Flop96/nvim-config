@@ -221,8 +221,71 @@ local statusline = {
 
 -- ## WINBAR ## --
 
+local Navic = {
+    condition = require("nvim-navic").is_available,
+    static = {
+	type_hl = {
+	    File = "Directory",
+	    Module = "Include",
+	    Namespace = "TSNamespace",
+	    Package = "Include",
+	    Class = "Struct",
+	    Method = "Method",
+	    Property = "TSProperty",
+	    Field = "TSField",
+	    Constructor = "TSConstructor",
+	    Enum = "TSField",
+	    Interface = "Type",
+	    Function = "Function",
+	    Variable = "TSVariable",
+	    Constant = "Constant",
+	    String = "String",
+	    Number = "Number",
+	    Boolean = "Boolean",
+	    Array = "TSField",
+	    Key = "TSKeyword",
+	    Null = "Comment",
+	    EnumMember = "TSField",
+	    Struct = "Struct",
+	    Event = "Keyword",
+	    Operator = "Operator",
+	    TypeParameter = "Type",
+	},
+    },
+    init = function(self)
+	local data = require("nvim-navic").get_data() or {}
+	local children = {}
+
+	for i, d in ipairs(data) do
+	    local child = {
+		{
+		    provider = d.icon,
+		    hl = self.type_hl[d.type],
+		},
+		{
+		    provider = d.name,
+		},
+	    }
+
+	    if #data > 1 and i < #data then
+		table.insert(child, {
+		    provider = " > ",
+		    hl = { fg = "#a6adc8" },
+		})
+	    end
+
+	    table.insert(children, child)
+
+	end
+
+	self[1] = self:new(children, 1)
+    end,
+    hl = { fg = "#a6adc8" },
+}
+
+
 -- Build out the winbar
-local winbar = { }
+local winbar = { Navic }
 
 -- ## TABLINE ## --
 
@@ -267,7 +330,7 @@ local TablineFileFlags = {
     },
 }
 
--- Construct the final fila name block
+-- Construct the final file name block
 local TablineFileNameBlock = {
     -- Get the file's name on initialisation
     init = function(self)

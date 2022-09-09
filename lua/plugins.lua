@@ -20,6 +20,7 @@ return packer.startup(function()
 	-- Package Manager
 	use 'wbthomason/packer.nvim'
 
+	-- Icons used by many other plugins
 	use 'kyazdani42/nvim-web-devicons'
 
         -- Floating terminal windows
@@ -53,6 +54,9 @@ return packer.startup(function()
 	-- Completions
 	use "neovim/nvim-lspconfig" -- LSP configs for Nvim
 	use "williamboman/mason.nvim" -- Installer for LSPs
+
+	-- navigation
+	use "SmiteshP/nvim-navic" -- Can show the LSP context in the status bar
 
 	-- Completion Sources
 	use "hrsh7th/cmp-nvim-lsp" -- Completions from LSPs
