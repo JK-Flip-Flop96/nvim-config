@@ -46,7 +46,7 @@ local kind_icons = {
     Event = "",
     Operator = "",
     TypeParameter = "",
-    Copilot = ""
+    Copilot = "" -- Extra Icon for Co-pilor suggestions
 }
 -- Cmp configuration
 cmp.setup {
@@ -177,16 +177,16 @@ require('lspconfig').rust_analyzer.setup{
 require('lspconfig').sumneko_lua.setup{
     capabilities = capabilities,
     settings = {
-	Lua = {
-	    -- Ensure that the LSP server recognises the 'vim' global 
-	    -- and Packer's 'use' function
-	    diagnostics = {
-		globals = { 'vim', 'use' }
-	    },
-	}
+		Lua = {
+	    	-- Ensure that the LSP server recognises the 'vim' global 
+	    	-- and Packer's 'use' function
+	    	diagnostics = {
+				globals = { 'vim', 'use' }
+			},
+		}
     },
     on_attach = function(client, bufnr)
-	navic.attach(client, bufnr)
+		navic.attach(client, bufnr)
     end,
 }
 

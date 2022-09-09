@@ -21,6 +21,7 @@ set.number = true
 set.relativenumber = true
 
 -- Tab Width
+set.tabstop = 4
 set.shiftwidth = 4
 set.showtabline = 1
 
