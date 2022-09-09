@@ -11,6 +11,9 @@ set.title = true
 set.cmdheight = 0
 set.showmode = false
 
+-- Status Line
+set.laststatus = 3
+
 -- Sign Column
 set.signcolumn = "yes" -- Prevents bouncing when the signcolumn is enabled/disabled
 
