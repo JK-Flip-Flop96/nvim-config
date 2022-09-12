@@ -123,8 +123,55 @@ local WorkDir = {
 
 -- Basic Ruler
 local Ruler = {
-    provider = " Ln %l/%L Cl %c %P ",
-    hl = { fg ="#a6adc8", bg = "#313244"}
+    provider = " Ln %l/%L Cl %c ",
+    hl = { fg ="#a6adc8", bg = "#45475a"}
+}
+
+-- Git Information
+local Git = {
+	conditions = conditions.is_git_repo,
+
+	init = function (self)
+		self.status_dict = vim.b.gitsigns_status_dict or { head = '', added = 0, changed = 0, removed = 0 }
+		self.has_changes = self.status_dict.added ~= 0 or self.status_dict.removed ~= 0 or self.status_dict.changed ~= 0
+	end,
+
+	hl = { fg = "#a6adc8", bg = "#45475a" },
+
+	{
+		provider = function (self)
+			return "  " .. self.status_dict.head .. " "
+		end,
+		hl = { bg = "#313244" }
+	},
+	{
+		condition = function (self)
+			return self.has_changes
+		end,
+		provider = " ",
+		hl = { fg = "#45475a" }
+	},
+	{
+		provider = function (self)
+			local count = self.status_dict.added or 0
+			return count > 0 and (" " .. count .. " ")
+		end,
+		hl = { fg = "#a6e3a1" }
+	},
+	{
+		provider = function (self)
+			local count = self.status_dict.changed or 0
+			return count > 0 and (" " .. count .. " ")
+		end,
+		hl = { fg = "#f9e2af" }
+	},
+	{
+		provider = function (self)
+			local count = self.status_dict.removed or 0
+			return count > 0 and (" " .. count .. " ")
+		end,
+		hl = { fg = "#f38ba8" }
+	},
 }
 
 -- Diagnostics signs 
@@ -199,6 +246,27 @@ local Diagnostics = {
 
 -- File Type/Info 
 
+local FileType = {
+	provider = function ()
+		return string.upper(vim.bo.filetype)
+	end,
+	hl = { fg = utils.get_highlight("Type").fg, bold = true }
+}
+
+local FileEncoding = {
+	provider = function ()
+		local enc = (vim.bo.fenc ~= '' and vim.bo.fenc) or vim.o.enc
+		return enc ~= 'utf-8' and enc:upper()
+	end
+}
+
+local FileFormat = {
+	provider = function ()
+		local fmt = vim.bo.fileformat
+		return fmt ~= 'unix' and fmt:upprt()
+	end
+}
+
 local FileIcon = {
     init = function(self)
 		local filename = self.filename
@@ -214,9 +282,32 @@ local FileIcon = {
     end
 }
 
+local LanguageBlock = {
+	init = function(self)
+		self.filename = vim.api.nvim_buf_get_name(0)
+	end,
+	{ provider = " " },
+	FileIcon,
+	FileType,
+	{ provider = " " },
+	hl = {
+		fg = "#1e1e2e",
+		bg = "#89b4fa",
+		force = true,
+	}
+}
+
 -- Build out the status line
 local statusline = {
-    ViMode, WorkDir, Diagnostics, { provider = "%=" }, Ruler
+    ViMode,
+	WorkDir,
+	{ provider = " " },
+	Git,
+	{ provider = " " },
+	Diagnostics,
+	{ provider = "%=" },
+	Ruler,
+	LanguageBlock
 }
 
 -- ## WINBAR ## --
