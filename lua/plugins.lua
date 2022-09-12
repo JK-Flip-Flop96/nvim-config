@@ -82,7 +82,14 @@ return packer.startup(function()
 	    	end, 100)
 	    end,
 	}
-	use "zbirenbaum/copilot-cmp" -- Adds copilot as a Completions source
+
+	use {
+		"zbirenbaum/copilot-cmp",-- Adds copilot as a Completions source
+		after = { "copilot.lua" },
+		config = function ()
+			require("copilot_cmp").setup()
+		end,
+	}
 
 	-- LSP Diagnostic Information printed on seperate lines
 	use({

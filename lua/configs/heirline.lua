@@ -97,7 +97,7 @@ local ViMode = {
 local WorkDir = {
     provider = function()
 		-- Prepend a 'g' for a global working directory or an 'l' for a local working directory
-		local icon = (vim.fn.haslocaldir(0) == 1 and " l" or " g") .. " " .. " "
+		local icon = (vim.fn.haslocaldir(0) == 1 and " " or " ") .. " "
 
 		-- Get the current working directory
 		local cwd = vim.fn.getcwd(0)
@@ -172,6 +172,25 @@ local Git = {
 		end,
 		hl = { fg = "#f38ba8" }
 	},
+}
+
+local LSPActive = {
+	conditions = conditions.lsp_attached,
+	update = { 'LspAttach', 'LspDetach' },
+
+	provider = function ()
+		local names = {}
+		for i, server in pairs(vim.lsp.buf_get_clients(0)) do
+			local name = server.name
+
+			-- Explicitly exclude copilot from this element 
+			if name ~= "copilot" then
+				table.insert(names, name)
+			end
+		end
+		return "  " .. table.concat(names, " ") .. " "
+	end,
+	hl = { fg = "#a6adc8", bg = "#313244"}
 }
 
 -- Diagnostics signs 
@@ -304,6 +323,7 @@ local statusline = {
 	{ provider = " " },
 	Git,
 	{ provider = " " },
+	LSPActive,
 	Diagnostics,
 	{ provider = "%=" },
 	Ruler,
