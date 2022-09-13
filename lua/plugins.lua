@@ -25,7 +25,7 @@ return packer.startup(function()
 
         -- Floating terminal windows
 	use {"akinsho/toggleterm.nvim", config = function()
-                require("toggleterm").setup()
+		require("toggleterm").setup()
 	end}
 
 	-- Custom Status Line
@@ -99,6 +99,15 @@ return packer.startup(function()
 	    end
 	})
 
+	-- Diagnostics Popout 
+	use {
+		"folke/trouble.nvim",
+		requires = "kyazdani42/nvim-web-devicons",
+		config = function ()
+			require("trouble").setup()
+		end,
+	}
+
 	-- Indent markers
 	use "lukas-reineke/indent-blankline.nvim"
 
@@ -106,16 +115,16 @@ return packer.startup(function()
 	use 'karb94/neoscroll.nvim'
 
 	-- Path Manipulation
-        use 'nvim-lua/plenary.nvim'
+    use 'nvim-lua/plenary.nvim'
 	use 'yegappan/mru'
 
 	use 'alexghergh/nvim-tmux-navigation'
 
 	-- Colour Scheme
-	use({
-                "catppuccin/nvim",
+	use {
+        "catppuccin/nvim",
 		as = "catppuccin"
-	})
+	}
 
 	-- Colour code highlighting 
 	use{

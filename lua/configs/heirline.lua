@@ -250,16 +250,9 @@ local Diagnostics = {
     {
 		-- Hints
 		provider = function (self)
-	    	return self.hints > 0 and (self.hint_icon .. self.hints)
+	    	return self.hints > 0 and (self.hint_icon .. self.hints .. " ")
 		end,
 		hl = { fg = "#94e2d5", bg = "#45475a" },
-    },
-    {
-		-- Trailing space
-		provider = function (self)
-	    	return self.total > 0 and " "
-		end,
-		hl = { bg = "#45475a" },
     },
 }
 
@@ -269,7 +262,7 @@ local FileType = {
 	provider = function ()
 		return string.upper(vim.bo.filetype)
 	end,
-	hl = { fg = utils.get_highlight("Type").fg, bold = true }
+	hl = { fg = utils.get_highlight("Type").fg }
 }
 
 local FileEncoding = {
