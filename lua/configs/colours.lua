@@ -8,6 +8,9 @@ local colors = require("catppuccin.palettes").get_palette()
 require("catppuccin").setup({
 	integrations = {
 		lsp_trouble = true,
+		treesitter = true,
+		gitsigns = true,
+		cmp = true,
 	},
     highlight_overrides = {
 		all = {
