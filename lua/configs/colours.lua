@@ -19,7 +19,5 @@ require("catppuccin").setup({
 	}
 })
 
-print("Colours loaded")
-
 -- Apply the catppuccin theme
 vim.cmd[[colorscheme catppuccin]]
