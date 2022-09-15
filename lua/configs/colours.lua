@@ -9,12 +9,17 @@ require("catppuccin").setup({
 	integrations = {
 		lsp_trouble = true,
 	},
-    custom_highlights = {
-		-- Colours to be used by the tab line
-		TablineFill = { bg = colors.mantle },
-		TablineSel = { fg = colors.subtext1, bg = colors.surface1 },
+    highlight_overrides = {
+		all = {
+			-- Colours to be used by the tab line
+			TablineFill = { bg = colors.mantle },
+			TablineSel = { fg = colors.subtext1, bg = colors.surface1 },
+			Comment = { fg = colors.overlay1 }
+		}
 	}
 })
 
+print("Colours loaded")
+
 -- Apply the catppuccin theme
-vim.cmd("colorscheme catppuccin")
+vim.cmd[[colorscheme catppuccin]]
