@@ -12,10 +12,13 @@ local colors = require("catppuccin.palettes").get_palette()
 -- Pass the colours to Heirline
 require("heirline").load_colors(colors)
 
--- Generic statusline components
-local Space = { provider = " " }
+-- ## GENERIC STATUS LINE COMPONENTS ## --
 
--- ## STATUS LINE COMPONENTS ## ==
+-- Alignment components
+local Space = { provider = " " }
+local Align = { provider = "%=" }
+
+-- ## STATUS LINE COMPONENTS ## --
 
 -- Mode Indicator - Modified from the Heirline Cookbook
 local ViMode = {
@@ -90,8 +93,8 @@ local ViMode = {
 
     -- Define the colours of the indicator
     hl = function(self)
-	-- Get the first chatacter of the mode
-	local mode = self.mode:sub(1, 1)
+		-- Get the first chatacter of the mode
+		local mode = self.mode:sub(1, 1)
 
 		-- Get the pair of colours from the table
 		local m_colors = self.mode_colors[mode]
@@ -135,7 +138,7 @@ local WorkDir = {
 -- Basic Ruler
 local Ruler = {
     provider = " Ln %l/%L Cl %c ",
-    hl = { fg ="subtext0", bg = "surface1"}
+    hl = { fg ="subtext0", bg = "surface0"}
 }
 
 -- Git Information
@@ -199,7 +202,13 @@ local LSPActive = {
 				table.insert(names, name)
 			end
 		end
-		return "  " .. table.concat(names, " ") .. " "
+
+		-- If there are no names, return nothing
+		if #names == 0 then
+			return ""
+		else
+			return "  " .. table.concat(names, " ") .. " "
+		end
 	end,
 	hl = { fg = "subtext0", bg = "surface0"}
 }
@@ -207,7 +216,7 @@ local LSPActive = {
 -- Diagnostics signs 
 local Diagnostics = {
     -- Only display this component if diagnostics are available for the current buffer
-    consdition = conditions.has_diagnostics,
+    conditions = conditions.has_diagnostics,
 
     -- Get the icons for the diagnostics
     static = {
@@ -287,15 +296,17 @@ local FileType = {
 local FileEncoding = {
 	provider = function ()
 		local enc = (vim.bo.fenc ~= '' and vim.bo.fenc) or vim.o.enc
-		return enc ~= 'utf-8' and enc:upper()
-	end
+		return " " .. enc:upper() .. " "
+	end,
+	hl = { fg = "subtext0", bg = "surface0"}
 }
 
 local FileFormat = {
 	provider = function ()
 		local fmt = vim.bo.fileformat
-		return fmt ~= 'unix' and fmt:upprt()
-	end
+		return " " .. fmt:upper() .. " "
+	end,
+	hl = { fg = "subtext0", bg = "surface0"}
 }
 
 local FileIcon = {
@@ -337,8 +348,13 @@ local statusline = {
 	Space,
 	LSPActive,
 	Diagnostics,
-	{ provider = "%=" },
+	Align,
 	Ruler,
+	Space,
+	FileEncoding,
+	Space,
+	FileFormat,
+	Space,
 	LanguageBlock
 }
 
@@ -408,7 +424,7 @@ local Navic = {
 
 
 -- Build out the winbar
-local winbar = { { provider = " " }, Navic }
+local winbar = { Space, Navic }
 
 -- ## TABLINE ## --
 
@@ -447,7 +463,7 @@ local TablineFileFlags = {
 				return " "
 	    	end
 		end,
-		hl = { fg = "green" }
+		hl = { fg = "yellow" }
     },
     {
 		provider = function(self)
@@ -496,7 +512,7 @@ local TablineCloseButton = {
     condition = function (self)
         return not vim.bo[self.bufnr].modified
     end,
-    { provider = " " },
+    Space,
     {
 		provider = "",
 		on_click = {
@@ -574,7 +590,7 @@ local TabPages = {
     condition = function()
 		return #vim.api.nvim_list_tabpages() >= 2
     end,
-    { provider = "%=" }, -- Make the following component right justified
+    Align, -- Make the following component right justified
     utils.make_tablist(TabPage),
     TabPageClose,
 }
