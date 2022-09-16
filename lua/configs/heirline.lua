@@ -1,10 +1,21 @@
 -- Custom Configuration for Heirline
 
--- ## STATUS LINE COMPONENTS ## ==
-
 -- Load Heirline's utilities
 local conditions = require("heirline.conditions")
 local utils = require("heirline.utils")
+
+-- ## COLOURS ## --
+
+-- Get the palette from Catppuccin 
+local colors = require("catppuccin.palettes").get_palette()
+
+-- Pass the colours to Heirline
+require("heirline").load_colors(colors)
+
+-- Generic statusline components
+local Space = { provider = " " }
+
+-- ## STATUS LINE COMPONENTS ## ==
 
 -- Mode Indicator - Modified from the Heirline Cookbook
 local ViMode = {
@@ -56,19 +67,19 @@ local ViMode = {
 		},
 		-- Define the color used in each mode
 		mode_colors = {
-	    	n = {"#89b4fe", "#1e1e2e"},
-	    	i = {"#a6e3a1", "#1e1e2e"},
-	    	v = {"#94e2d5", "#1e1e2e"},
-	    	V = {"#94e2d5", "#1e1e2e"},
-	    	["\22"] = {"#94e2d5", "#1e1e2e"},
-	    	c = {"#fab387", "#1e1e2e"},
-	    	s = {"#cba6f7", "#1e1e2e"},
-	    	S = {"#cba6f7", "#1e1e2e"},
-	    	["\19"] = {"#cba6f7", "#1e1e2e"},
-	    	R = {"#fab387", "#1e1e2e"},
-	    	r = {"#fab387", "#1e1e2e"},
-	    	["!"] = {"#f38ba8", "#1e1e2e"},
-	    	t = {"#f38ba8", "#1e1e2e"},
+	    	n = {"blue", "base"},
+	    	i = {"green", "base"},
+	    	v = {"teal", "base"},
+	    	V = {"teal", "base"},
+	    	["\22"] = {"teal", "base"},
+	    	c = {"peach", "base"},
+	    	s = {"mauve", "base"},
+	    	S = {"mauve", "base"},
+	    	["\19"] = {"mauve", "base"},
+	    	R = {"peach", "base"},
+	    	r = {"peach", "base"},
+	    	["!"] = {"red", "base"},
+	    	t = {"red", "base"},
 		}
     },
 
@@ -118,13 +129,13 @@ local WorkDir = {
     end,
 
     -- Set the colour
-    hl = { fg = "#a6adc8", bg = "#313244", bold = false },
+    hl = { fg = "subtext0", bg = "surface0", bold = false },
 }
 
 -- Basic Ruler
 local Ruler = {
     provider = " Ln %l/%L Cl %c ",
-    hl = { fg ="#a6adc8", bg = "#45475a"}
+    hl = { fg ="subtext0", bg = "surface1"}
 }
 
 -- Git Information
@@ -136,41 +147,41 @@ local Git = {
 		self.has_changes = self.status_dict.added ~= 0 or self.status_dict.removed ~= 0 or self.status_dict.changed ~= 0
 	end,
 
-	hl = { fg = "#a6adc8", bg = "#45475a" },
+	hl = { fg = "subtext0", bg = "surface1" },
 
 	{
 		provider = function (self)
 			return "  " .. self.status_dict.head .. " "
 		end,
-		hl = { bg = "#313244" }
+		hl = { bg = "surface0" }
 	},
 	{
 		condition = function (self)
 			return self.has_changes
 		end,
 		provider = " ",
-		hl = { fg = "#45475a" }
+		hl = { fg = "surface1" }
 	},
 	{
 		provider = function (self)
 			local count = self.status_dict.added or 0
 			return count > 0 and (" " .. count .. " ")
 		end,
-		hl = { fg = "#a6e3a1" }
+		hl = { fg = "green" }
 	},
 	{
 		provider = function (self)
 			local count = self.status_dict.changed or 0
 			return count > 0 and (" " .. count .. " ")
 		end,
-		hl = { fg = "#f9e2af" }
+		hl = { fg = "yellow" }
 	},
 	{
 		provider = function (self)
 			local count = self.status_dict.removed or 0
 			return count > 0 and (" " .. count .. " ")
 		end,
-		hl = { fg = "#f38ba8" }
+		hl = { fg = "red" }
 	},
 }
 
@@ -190,7 +201,7 @@ local LSPActive = {
 		end
 		return "  " .. table.concat(names, " ") .. " "
 	end,
-	hl = { fg = "#a6adc8", bg = "#313244"}
+	hl = { fg = "subtext0", bg = "surface0"}
 }
 
 -- Diagnostics signs 
@@ -218,41 +229,49 @@ local Diagnostics = {
     -- Update when the diagnostics change or when entering a new buffer
     update = { "DiagnosticChanged", "BufEnter" },
 
+	-- Bring up the Trouble diagnostics windown when the element is clicked
+	on_click = {
+		callback = function ()
+			require("trouble").toggle({ mode = "document_diagnostics" })
+		end,
+		name = "heirline_diagnostics",
+	},
+
     -- Define the text to display
     {
 		-- Leading space
 		provider = function (self)
 	    	return self.total > 0 and " "
 		end,
-		hl = { bg = "#45475a" },
+		hl = { bg = "surface1" },
     },
     {
 		-- Errors
 		provider = function (self)
 	    	return self.errors > 0 and (self.error_icon .. self.errors .. " ")
 		end,
-		hl = { fg = "#f38ba8", bg = "#45475a" },
+		hl = { fg = "red", bg = "surface1" },
     },
     {
 		-- Warnings
 		provider = function (self)
 	    	return self.warnings > 0 and (self.warn_icon .. self.warnings .. " ")
 		end,
-		hl = { fg = "#f9e2af", bg = "#45475a" },
+		hl = { fg = "yellow", bg = "surface1" },
     },
     {
 		-- Info
 		provider = function (self)
 	    	return self.info > 0 and (self.info_icon .. self.info .. " ")
 		end,
-		hl = { fg = "#89b4fa", bg = "#45475a" },
+		hl = { fg = "blue", bg = "surface1" },
     },
     {
 		-- Hints
 		provider = function (self)
 	    	return self.hints > 0 and (self.hint_icon .. self.hints .. " ")
 		end,
-		hl = { fg = "#94e2d5", bg = "#45475a" },
+		hl = { fg = "teal", bg = "surface1" },
     },
 }
 
@@ -298,13 +317,13 @@ local LanguageBlock = {
 	init = function(self)
 		self.filename = vim.api.nvim_buf_get_name(0)
 	end,
-	{ provider = " " },
+	Space,
 	FileIcon,
 	FileType,
-	{ provider = " " },
+	Space,
 	hl = {
-		fg = "#1e1e2e",
-		bg = "#89b4fa",
+		fg = "base",
+		bg = "blue",
 		force = true,
 	}
 }
@@ -313,9 +332,9 @@ local LanguageBlock = {
 local statusline = {
     ViMode,
 	WorkDir,
-	{ provider = " " },
+	Space,
 	Git,
-	{ provider = " " },
+	Space,
 	LSPActive,
 	Diagnostics,
 	{ provider = "%=" },
@@ -374,7 +393,7 @@ local Navic = {
 	    	if #data > 1 and i < #data then
 				table.insert(child, {
 		    		provider = " > ",
-		    		hl = { fg = "#a6adc8" },
+		    		hl = { fg = "subtext0" },
 				})
 	    	end
 
@@ -384,7 +403,7 @@ local Navic = {
 
 		self[1] = self:new(children, 1)
     end,
-    hl = { fg = "#a6adc8" },
+    hl = { fg = "subtext0" },
 }
 
 
@@ -398,7 +417,13 @@ local TablineBufnr = {
     provider = function(self)
 		return tostring(self.bufnr) .. ": "
     end,
-    hl = { fg = "#a6adc8" },
+    hl = function(self)
+		if self.is_active then
+	    	return "TabLineSel"
+		else
+	    	return "TabLine"
+		end
+	end,
 }
 
 -- Get the file's name 
@@ -422,7 +447,7 @@ local TablineFileFlags = {
 				return " "
 	    	end
 		end,
-		hl = { fg = "#a6e3a1" }
+		hl = { fg = "green" }
     },
     {
 		provider = function(self)
@@ -430,7 +455,7 @@ local TablineFileFlags = {
 				return " "
 	    	end
 		end,
-		hl = { fg = "#fab387" },
+		hl = { fg = "peach" },
     },
 }
 
@@ -495,7 +520,7 @@ local TablineCloseButton = {
 }
 
 local TablineBufferBlockLeft = {
-    provider = "▎",
+    provider = "▎ ",
     hl = function(self)
 		if self.is_active then
 	    	return { bg = utils.get_highlight("TablineSel").bg, fg = utils.get_highlight("TablineFill").bg }
@@ -506,7 +531,7 @@ local TablineBufferBlockLeft = {
 }
 
 local TablineBufferBlockRight = {
-    provider = "▊",
+    provider = "█▊",
     hl = function(self)
 		if self.is_active then
 		    return { bg = utils.get_highlight("TablineFill").bg, fg = utils.get_highlight("TablineSel").bg }
@@ -523,8 +548,8 @@ local TablineBufferBlock = { TablineBufferBlockLeft, TablineFileNameBlock, Tabli
 local BufferLine = utils.make_buflist(
     TablineBufferBlock,
     -- Define the icons used for left/right truncation
-    { provicer = "", hl = { fg = "#a6adc8" }},
-    { provicer = "", hl = { fg = "#a6adc8" }}
+    { provicer = "", hl = { fg = "subtext0" }},
+    { provicer = "", hl = { fg = "subtext0" }}
 )
 
 local TabPage = {

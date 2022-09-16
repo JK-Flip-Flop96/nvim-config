@@ -17,6 +17,7 @@ require("catppuccin").setup({
 			-- Colours to be used by the tab line
 			TablineFill = { bg = colors.mantle },
 			TablineSel = { fg = colors.subtext1, bg = colors.surface1 },
+			Tabline = { fg = colors.overlay0, bg = colors.surface0 },
 			Comment = { fg = colors.overlay1 }
 		}
 	}
