@@ -1,6 +1,9 @@
 -- Settings
 local set = vim.opt
 
+--Terminal Colours
+set.termguicolors = true
+
 -- STYLE
 
 -- Window Title

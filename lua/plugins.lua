@@ -13,6 +13,7 @@ packer.init {
 			return require("packer.util").float { border = "rounded" }
 		end,
 	},
+	auto_reload_compiled = true,
 }
 
 -- Install Plugins
@@ -123,7 +124,8 @@ return packer.startup(function()
 	-- Colour Scheme
 	use {
         "catppuccin/nvim",
-		as = "catppuccin"
+		as = "catppuccin",
+		run = ":CatppuccinCompile"
 	}
 
 	-- Colour code highlighting 

@@ -1,4 +1,5 @@
 -- Load Heirline
+
 local heirline_status, heirline = pcall(require, "heirline")
 
 -- Exit on Load Error
@@ -15,10 +16,21 @@ local utils = require("heirline.utils")
 -- ## COLOURS ## --
 
 -- Get the palette from Catppuccin 
-local colors = require("catppuccin.palettes").get_palette()
+local function setup_colors()
+	return require("catppuccin.palettes").get_palette()
+end
 
 -- Pass the colours to Heirline
-heirline.load_colors(colors)
+heirline.load_colors(setup_colors())
+
+vim.api.nvim_create_augroup("Heirline", { clear = true })
+vim.api.nvim_create_autocmd("ColorScheme", {
+	callback = function()
+		local colors  = setup_colors()
+		utils.on_colorscheme(colors)
+	end,
+	group = "Heirline",
+})
 
 -- ## GENERIC STATUS LINE COMPONENTS ## --
 
