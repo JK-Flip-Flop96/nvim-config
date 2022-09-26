@@ -1,3 +1,11 @@
+-- Load Heirline
+local heirline_status, heirline = pcall(require, "heirline")
+
+-- Exit on Load Error
+if not heirline_status then
+	return
+end
+
 -- Custom Configuration for Heirline
 
 -- Load Heirline's utilities
@@ -10,7 +18,7 @@ local utils = require("heirline.utils")
 local colors = require("catppuccin.palettes").get_palette()
 
 -- Pass the colours to Heirline
-require("heirline").load_colors(colors)
+heirline.load_colors(colors)
 
 -- ## GENERIC STATUS LINE COMPONENTS ## --
 
@@ -599,4 +607,4 @@ local TabPages = {
 local tabline = { BufferLine, TabPages }
 
 -- Set the statusline
-require'heirline'.setup(statusline, winbar, tabline)
+heirline.setup(statusline, winbar, tabline)
