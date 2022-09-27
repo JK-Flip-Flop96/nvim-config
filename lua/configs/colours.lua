@@ -25,7 +25,7 @@ require("catppuccin").setup {
 		frappe = {},
 		macchiato = {},
 		mocha = {
-			TablineFill = { bg = mocha.mantle },
+			TabLineFill = { fg = mocha.lavender, bg = mocha.mantle },
 			TablineSel = { fg = mocha.subtext1, bg = mocha.surface1 },
 			Tabline = { fg = mocha.overlay0, bg = mocha.surface0 },
 			Comment = { fg = mocha.overlay1 },
