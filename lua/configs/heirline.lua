@@ -650,7 +650,13 @@ local TablineOffset = {
 		local width = vim.api.nvim_win_get_width(self.winid)
 		local pad = math.ceil((width - #title) / 2)
 
-		return string.rep(" ", pad) .. title .. string.rep(" ", pad)
+		local rightPad = 0
+
+		if width % 2 == 0 then
+			rightPad = 1
+		end
+
+		return string.rep(" ", pad) .. title .. string.rep(" ", pad - rightPad)
 	end,
 
 	hl = function(self)
