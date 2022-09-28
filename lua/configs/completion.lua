@@ -46,7 +46,7 @@ local kind_icons = {
     Event = "",
     Operator = "",
     TypeParameter = "",
-    Copilot = "" -- Extra Icon for Co-pilor suggestions
+    Copilot = "" -- Extra Icon for Co-pilot suggestions
 }
 -- Cmp configuration
 cmp.setup {
@@ -86,35 +86,35 @@ cmp.setup {
     },
     -- Cmp Sources
     sources = cmp.config.sources({
-	{ name = "copilot" },
-	{ name = "nvim_lsp" },
-	{ name = "luasnip" },
-	{ name = "look" },
-	{ name = "path" },
-	{ name = "buffer" },
-	{ name = "cmdline" },
+		{ name = "copilot" },
+		{ name = "nvim_lsp" },
+		{ name = "luasnip" },
+		{ name = "look" },
+		{ name = "path" },
+		{ name = "buffer" },
+		{ name = "cmdline" },
     }),
 
     -- Cmp Experimental Features
     experimental = {
-	ghost_text = true
+		ghost_text = true
     },
 }
 
 cmp.setup.filetype('gitcommit', {
     sources = cmp.config.sources({
-	{ name = 'cmp_git' },
+		{ name = 'cmp_git' },
     }, {
-	{ name = 'buffer'},
+		{ name = 'buffer'},
     })
 })
 
 cmp.setup.cmdline(":", {
     mapping = cmp.mapping.preset.cmdline(),
     sources = cmp.config.sources({
-	{ name = 'path' }
+		{ name = 'path' }
     }, {
-	{ name = 'cmdline' }
+		{ name = 'cmdline' }
     })
 })
 

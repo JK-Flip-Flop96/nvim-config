@@ -24,7 +24,13 @@ return packer.startup(function()
 	-- Icons used by many other plugins
 	use 'kyazdani42/nvim-web-devicons'
 
-        -- Floating terminal windows
+	-- File Tree
+	use {
+		'kyazdani42/nvim-tree.lua',
+		requires = { 'kyazdani42/nvim-web-devicons' },
+	}
+
+	-- Floating terminal windows
 	use {"akinsho/toggleterm.nvim", config = function()
 		require("toggleterm").setup()
 	end}

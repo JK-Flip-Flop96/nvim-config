@@ -444,7 +444,25 @@ local Navic = {
 
 
 -- Build out the winbar
-local winbar = { Space, Navic }
+local FileWinbar = { Space, Navic }
+
+local winbar = {
+	fallthrough = false,
+	{
+		condition = function()
+			return conditions.buffer_matches({
+				buftype = { "nofile", "prompt", "help", "quickfix", "NvimTree" },
+				filetype = { "^git.*", "fugitive" },
+			})
+		end,
+		init = function()
+			vim.opt_local.winbar = nil
+		end,
+	},
+	{
+		FileWinbar,
+	}
+}
 
 -- ## TABLINE ## --
 
@@ -615,8 +633,37 @@ local TabPages = {
     TabPageClose,
 }
 
+local TablineOffset = {
+	condition = function(self)
+		local win = vim.api.nvim_tabpage_list_wins(0)[1]
+		local bufnr = vim.api.nvim_win_get_buf(win)
+		self.winid = win
+
+		if vim.bo[bufnr].filetype == "NvimTree" then
+			self.title = "Files"
+			return true
+		end
+	end,
+
+	provider = function(self)
+		local title = self.title
+		local width = vim.api.nvim_win_get_width(self.winid)
+		local pad = math.ceil((width - #title) / 2)
+
+		return string.rep(" ", pad) .. title .. string.rep(" ", pad)
+	end,
+
+	hl = function(self)
+		if vim.api.nvim_get_current_win() == self.winid then
+			return "TabLineSel"
+		else
+			return "TabLine"
+		end
+	end,
+}
+
 -- Build out the tabline
-local tabline = { BufferLine, TabPages }
+local tabline = {TablineOffset, BufferLine, TabPages }
 
 -- Set the statusline
 heirline.setup(statusline, winbar, tabline)

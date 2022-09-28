@@ -1,6 +1,10 @@
 -- Settings
 local set = vim.opt
 
+-- Disable netrw
+vim.g.loaded = 1
+vim.g.loaded_netrwPlugin = 1
+
 --Terminal Colours
 set.termguicolors = true
 
