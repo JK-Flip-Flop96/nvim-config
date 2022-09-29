@@ -153,6 +153,14 @@ local WorkDir = {
 
     -- Set the colour
     hl = { fg = "subtext0", bg = "surface0", bold = false },
+
+	-- Toggle nvim-tree when the cwd is clicked
+	on_click = {
+		callback = function()
+			vim.cmd("NvimTreeToggle")
+		end,
+		name = "heirline_nvimtree",
+	},
 }
 
 -- Basic Ruler
@@ -648,15 +656,15 @@ local TablineOffset = {
 	provider = function(self)
 		local title = self.title
 		local width = vim.api.nvim_win_get_width(self.winid)
-		local pad = math.ceil((width - #title) / 2)
+		local leftpad = math.ceil((width - #title) / 2)
+		local rightPad = leftpad
 
-		local rightPad = 0
-
-		if width % 2 == 0 then
-			rightPad = 1
+		-- Correct for odd widths
+		if width % 2 ~= #title % 2 then
+			rightPad = rightPad - 1
 		end
 
-		return string.rep(" ", pad) .. title .. string.rep(" ", pad - rightPad)
+		return string.rep(" ", leftpad) .. title .. string.rep(" ", rightPad)
 	end,
 
 	hl = function(self)

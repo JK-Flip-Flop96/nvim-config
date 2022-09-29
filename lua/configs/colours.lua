@@ -17,6 +17,7 @@ require("catppuccin").setup {
 		treesitter = true,
 		gitsigns = true,
 		cmp = true,
+		nvimtree = true,
 	},
 
     highlight_overrides = {
