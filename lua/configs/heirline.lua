@@ -165,7 +165,7 @@ local WorkDir = {
 
 -- Basic Ruler
 local Ruler = {
-    provider = " Ln %l/%L Cl %c ",
+    provider = "  Ln %l/%L Cl %c ",
     hl = { fg ="subtext0", bg = "surface0"}
 }
 
@@ -181,6 +181,9 @@ local Git = {
 	hl = { fg = "subtext0", bg = "surface1" },
 
 	{
+		condition = function (self)
+			return self.status_dict.head ~= ''
+		end,
 		provider = function (self)
 			return "  " .. self.status_dict.head .. " "
 		end,
@@ -218,7 +221,7 @@ local Git = {
 
 local LSPActive = {
 	conditions = conditions.lsp_attached,
-	update = { 'LspAttach', 'LspDetach' },
+	update = { 'LspAttach', 'LspDetach', 'BufEnter' },
 
 	provider = function ()
 		local names = {}
@@ -468,7 +471,13 @@ local winbar = {
 		end,
 	},
 	{
+		condition = require("nvim-navic").is_available,
 		FileWinbar,
+	},
+	{
+		init = function()
+			vim.opt_local.winbar = nil
+		end,
 	}
 }
 
@@ -652,28 +661,34 @@ local TablineOffset = {
 			return true
 		end
 	end,
+	{
+		provider = function(self)
+			local title = self.title
+			local width = vim.api.nvim_win_get_width(self.winid)
+			local leftpad = math.ceil((width - #title) / 2)
+			local rightPad = leftpad
 
-	provider = function(self)
-		local title = self.title
-		local width = vim.api.nvim_win_get_width(self.winid)
-		local leftpad = math.ceil((width - #title) / 2)
-		local rightPad = leftpad
+			-- Correct for odd widths
+			if width % 2 ~= #title % 2 then
+				rightPad = rightPad - 1
+			end
 
-		-- Correct for odd widths
-		if width % 2 ~= #title % 2 then
-			rightPad = rightPad - 1
-		end
+			return string.rep(" ", leftpad) .. title .. string.rep(" ", rightPad)
+		end,
 
-		return string.rep(" ", leftpad) .. title .. string.rep(" ", rightPad)
-	end,
+		hl = function(self)
+			if vim.api.nvim_get_current_win() == self.winid then
+				return "TabLineSel"
+			else
+				return "TabLine"
+			end
+		end,
 
-	hl = function(self)
-		if vim.api.nvim_get_current_win() == self.winid then
-			return "TabLineSel"
-		else
-			return "TabLine"
-		end
-	end,
+	},
+	{
+		Space,
+	},
+
 }
 
 -- Build out the tabline
