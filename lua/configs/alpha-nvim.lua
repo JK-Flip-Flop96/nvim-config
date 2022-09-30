@@ -147,7 +147,7 @@ dashboard.section.header.val = {
     [[       _\/\\\___\//\\\\\___\//\\\\\\\\\\___\///\\\\\/_______\//\\\______\/\\\__\/\\\__\/\\\__\/\\\_ ]],
     [[        _\///_____\/////_____\//////////______\/////__________\///_______\///___\///___\///___\///__]],
 }
-dashboard.section.header.opts.hl = "Constant"
+dashboard.section.header.opts.hl = "Function"
 
 local section_mru = {
     type = "group",
