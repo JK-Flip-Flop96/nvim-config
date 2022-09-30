@@ -10,7 +10,7 @@ end
 packer.init {
 	display = {
 		open_fn = function()
-			return require("packer.util").float { border = "rounded" }
+			return require("packer.util").float { border = "single" }
 		end,
 	},
 	auto_reload_compiled = true,
@@ -75,8 +75,9 @@ return packer.startup(function()
 	use "hrsh7th/nvim-cmp" -- Completions plugin
 
 	-- LuaSnip
-	use "L3MON4D3/LuaSnip" -- Snippets
+	use "L3MON4D3/LuaSnip" -- Snippet Loader
 	use "saadparwaiz1/cmp_luasnip" -- Cmp/LuaSnip Compatability
+	use "rafamadriz/friendly-snippets" -- Snippets
 
 	-- GitHub Co-Pilot
 	--use "github/copilot.vim" -- Main Co-Pilot Plugin - Only enable if you want to configure the Co-Pilot Plugin
