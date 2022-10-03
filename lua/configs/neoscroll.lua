@@ -11,14 +11,14 @@ neoscroll.setup({
 local keymap = {}
 
 -- Define a custom keymap for scrolling
-keymap['<C-u>'] = {'scroll', {'-vim.wo.scroll', 'true', '250'}}
-keymap['<C-d>'] = {'scroll', {'vim.wo.scroll', 'true', '250'}}
-keymap['<C-b>'] = {'scroll', {'-vim.api.nvim_win_get_height(0)', 'true', '450'}}
-keymap['<C-f>'] = {'scroll', {'vim.api.nvim_win_get_height(0)', 'true', '450'}}
-keymap['<C-y>'] = {'scroll', {'-0.10', 'true', '100'}}
-keymap['<C-e>'] = {'scroll', {'0.10', 'true', '100'}}
-keymap['zt'] = {'zt', {'250'}}
-keymap['zz'] = {'zz', {'250'}}
-keymap['zb'] = {'zb', {'250'}}
+keymap['<C-u>'] = {'scroll', {'-vim.wo.scroll', 'true', '125'}}
+keymap['<C-d>'] = {'scroll', {'vim.wo.scroll', 'true', '125'}}
+keymap['<C-b>'] = {'scroll', {'-vim.api.nvim_win_get_height(0)', 'true', '225'}}
+keymap['<C-f>'] = {'scroll', {'vim.api.nvim_win_get_height(0)', 'true', '225'}}
+keymap['<C-y>'] = {'scroll', {'-0.10', 'true', '50'}}
+keymap['<C-e>'] = {'scroll', {'0.10', 'true', '50'}}
+keymap['zt'] = {'zt', {'125'}}
+keymap['zz'] = {'zz', {'125'}}
+keymap['zb'] = {'zb', {'125'}}
 
 require('neoscroll.config').set_mappings(keymap)
