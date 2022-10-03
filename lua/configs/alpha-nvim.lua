@@ -191,9 +191,11 @@ local buttons = {
 }
 
 -- Define the Footer
-dashboard.section.footer.val = {
-    "Config by Stuart Miller 2022",
-}
+dashboard.section.footer.val = function()
+	local plugins_count = vim.fn.len(vim.fn.globpath("~/.local/share/nvim/site/pack/packer/start/", "*", 0, 1))
+	return "Loaded " .. plugins_count .. " Plugins"
+end
+dashboard.section.footer.opts.hl = "Comment"
 
 -- Define the order and position of elements on the screen
 dashboard.config.layout = {
