@@ -116,6 +116,22 @@ return packer.startup(function()
 		end,
 	}
 
+	-- Shortcut helper
+	use {
+		"folke/which-key.nvim",
+		config = function ()
+			require("which-key").setup()
+		end,
+	}
+
+	-- Highlighting and listing for Todo comments
+	use {
+		"folke/todo-comments.nvim",
+		config = function ()
+			require("todo-comments").setup()
+		end,
+	}
+
 	-- Indent markers
 	use "lukas-reineke/indent-blankline.nvim"
 
