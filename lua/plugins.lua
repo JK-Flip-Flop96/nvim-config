@@ -138,9 +138,21 @@ return packer.startup(function()
 	-- Smooth Scrolling
 	use 'karb94/neoscroll.nvim'
 
-	-- Path Manipulation
+	-- Libraries
     use 'nvim-lua/plenary.nvim'
 	use 'yegappan/mru'
+
+	-- UI Libraries
+	use 'MunifTanjim/nui.nvim'
+	use 'rcarriga/nvim-notify'
+
+	use ({
+		'folke/noice.nvim',
+		event = "VimEnter",
+		config = function ()
+			require("noice").setup()
+		end,
+	})
 
 	use 'alexghergh/nvim-tmux-navigation'
 
