@@ -193,7 +193,8 @@ local buttons = {
 -- Define the Footer
 dashboard.section.footer.val = function()
 	local plugins_count = vim.fn.len(vim.fn.globpath("~/.local/share/nvim/site/pack/packer/start/", "*", 0, 1))
-	return "Loaded " .. plugins_count .. " Plugins"
+	local lazy_plugin_count = vim.fn.len(vim.fn.globpath("~/.local/share/nvim/site/pack/packer/opt/", "*", 0, 1))
+	return "Loaded " .. plugins_count .. " Plugins. Lazy Loaded " .. lazy_plugin_count .. " Plugins"
 end
 dashboard.section.footer.opts.hl = "Comment"
 
