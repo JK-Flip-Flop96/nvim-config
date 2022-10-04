@@ -154,7 +154,6 @@ return packer.startup(function()
 			"rcarriga/nvim-notify",
 			"hrsh7th/nvim-cmp",
 		},
-		after = { "nvim-cmp" },
 	})
 
 	use 'alexghergh/nvim-tmux-navigation'
