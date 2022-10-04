@@ -152,6 +152,12 @@ return packer.startup(function()
 		config = function ()
 			require("noice").setup()
 		end,
+		requires = {
+			"MunifTanjim/nui.nvim",
+			"rcarriga/nvim-notify",
+			"hrsh7th/nvim-cmp",
+		},
+		after = { "nvim-cmp" },
 	})
 
 	use 'alexghergh/nvim-tmux-navigation'
