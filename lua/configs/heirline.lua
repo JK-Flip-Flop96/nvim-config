@@ -228,8 +228,8 @@ local LSPActive = {
 		for i, server in pairs(vim.lsp.buf_get_clients(0)) do
 			local name = server.name
 
-			-- Explicitly exclude copilot from this element 
-			if name ~= "copilot" then
+			-- Explicitly exclude copilot and null-ls from this element 
+			if name ~= "copilot" and name ~= "null-ls" then
 				table.insert(names, name)
 			end
 		end
