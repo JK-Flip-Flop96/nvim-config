@@ -4,6 +4,10 @@ if not noice_status then
 end
 
 noice.setup({
+	popupmenu = {
+		enable = false,
+		backend = 'cmp',
+	},
 	views = {
 		cmdline_popup = {
 			position = {
@@ -15,10 +19,11 @@ noice.setup({
 				height = "auto",
 			},
 			border = {
-				style = "single",
+				style = "none",
+				padding = { 1, 2 }
 			},
 			win_options = {
-				winhighlight = { Normal = "Normal", FloatBorder = "Normal" }
+				winhighlight = { Normal = "NormalFloat", FloatBorder = "NormalFloat" }
 			}
 		},
 		popupmenu = {
@@ -32,11 +37,11 @@ noice.setup({
 				height = 10,
 			},
 			border = {
-				style = "single",
-				padding = { 0, 1 },
+				style = "none",
+				padding = { 1, 2 },
 			},
 			win_options = {
-				winhighlight = { Normal = "Normal", FloatBorder = "DiagnosticInfo" }
+				winhighlight = { Normal = "NormalFloat", FloatBorder = "NormalFloat" }
 			}
 		}
 	}

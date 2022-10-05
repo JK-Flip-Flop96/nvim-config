@@ -152,7 +152,6 @@ return packer.startup(function()
 		requires = {
 			"MunifTanjim/nui.nvim",
 			"rcarriga/nvim-notify",
-			"hrsh7th/nvim-cmp",
 		},
 	})
 
