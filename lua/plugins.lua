@@ -10,7 +10,7 @@ end
 packer.init {
 	display = {
 		open_fn = function()
-			return require("packer.util").float { border = "single" }
+			return require("packer.util").float { border = "none" }
 		end,
 	},
 	auto_reload_compiled = true,

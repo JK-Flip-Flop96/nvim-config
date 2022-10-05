@@ -124,7 +124,7 @@ cmp.setup.cmdline(":", {
 -- Mason setup
 require("mason").setup({
     ui = {
-	border = "single",
+	border = "none",
 	icons = {
 	    server_installed = "",
 	    server_pending = "",
