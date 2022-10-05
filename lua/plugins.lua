@@ -59,8 +59,9 @@ return packer.startup(function()
 	use "lewis6991/impatient.nvim"
 
 	-- Completions
-	use "neovim/nvim-lspconfig" -- LSP configs for Nvim
 	use "williamboman/mason.nvim" -- Installer for LSPs
+	use "williamboman/mason-lspconfig.nvim" -- Bridge between Mason and LSPs
+	use "neovim/nvim-lspconfig" -- LSP configs for Nvim
 
 	-- navigation
 	use "SmiteshP/nvim-navic" -- Can show the LSP context in the status bar

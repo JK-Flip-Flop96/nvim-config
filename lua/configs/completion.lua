@@ -121,18 +121,6 @@ cmp.setup.cmdline(":", {
 
 -- LSP SETTINGS
 
--- Mason setup
-require("mason").setup({
-    ui = {
-	border = "none",
-	icons = {
-	    server_installed = "",
-	    server_pending = "",
-	    server_uninstalled = ""
-	}
-    }
-})
-
 -- LSP servers
 local capabilities = require('cmp_nvim_lsp').update_capabilities(vim.lsp.protocol.make_client_capabilities())
 
