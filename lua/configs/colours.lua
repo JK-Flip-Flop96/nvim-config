@@ -44,11 +44,11 @@ require("catppuccin").setup {
 			MasonHighlightBlockSecondary = { bg = mocha.red, fg = mocha.base },
 			MasonHighlightBlockBoldSecondary = { bg = mocha.red, fg = mocha.base, bold = true },
 
-			MasonLink = { fg = mocha.blue },
+			MasonLink = { fg = mocha.rosewater },
 
-			MasonMuted = { fg = mocha.overlay2 },
-			MasonMutedBlock = { bg = mocha.overlay2, fg = mocha.base },
-			MasonMutedBlockBold = { bg = mocha.overlay2, fg = mocha.base, bold = true },
+			MasonMuted = { fg = mocha.overlay1 },
+			MasonMutedBlock = { bg = mocha.surface0, fg = mocha.overlay1 },
+			MasonMutedBlockBold = { bg = mocha.surface0, fg = mocha.overlay1, bold = true },
 
 			MasonError = { fg = mocha.red },
 
