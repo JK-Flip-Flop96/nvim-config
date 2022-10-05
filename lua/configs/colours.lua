@@ -31,6 +31,29 @@ require("catppuccin").setup {
 			Tabline = { fg = mocha.overlay0, bg = mocha.surface0 },
 			Comment = { fg = mocha.overlay1 },
 			CursorLineNR = { fg = mocha.yellow },
+
+			-- Mason Colours 
+			MasonHeader = { fg = mocha.base, bg = mocha.peach },
+			MasonHeaderSecondary = { fg = mocha.base, bg = mocha.teal },
+
+			MasonHighlight = { fg = mocha.teal },
+			MasonHighlightBlock = { bg = mocha.teal, fg = mocha.base },
+			MasonHighlightBlockBold = { bg = mocha.teal, fg = mocha.base, bold = true },
+
+			MasonHighlightSecondary = { fg = mocha.red },
+			MasonHighlightBlockSecondary = { bg = mocha.red, fg = mocha.base },
+			MasonHighlightBlockBoldSecondary = { bg = mocha.red, fg = mocha.base, bold = true },
+
+			MasonLink = { fg = mocha.blue },
+
+			MasonMuted = { fg = mocha.overlay2 },
+			MasonMutedBlock = { bg = mocha.overlay2, fg = mocha.base },
+			MasonMutedBlockBold = { bg = mocha.overlay2, fg = mocha.base, bold = true },
+
+			MasonError = { fg = mocha.red },
+
+			MasonHeading = { bold = true }
+
 		},
 	},
 }
