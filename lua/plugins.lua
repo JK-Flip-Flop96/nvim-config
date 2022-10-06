@@ -18,8 +18,17 @@ packer.init {
 
 -- Install Plugins
 return packer.startup(function()
+
 	-- Package Manager
 	use 'wbthomason/packer.nvim'
+
+	-- Startup performance enhancement
+	use {
+		"lewis6991/impatient.nvim",
+		config = function()
+			require("impatient")
+		end
+	}
 
 	-- Icons used by many other plugins
 	use 'kyazdani42/nvim-web-devicons'
@@ -54,9 +63,6 @@ return packer.startup(function()
 	        require('gitsigns').setup()
 	    end
 	}
-
-	-- Startup performance "enhancement
-	use "lewis6991/impatient.nvim"
 
 	-- Completions
 	use "williamboman/mason.nvim" -- Installer for LSPs
