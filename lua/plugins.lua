@@ -90,7 +90,7 @@ return packer.startup(function()
 	--use "github/copilot.vim" -- Main Co-Pilot Plugin - Only enable if you want to configure the Co-Pilot Plugin
 	use {
 	    "zbirenbaum/copilot.lua", -- Pure lua replacement for copilot.vim
-	    event = {"VimEnter"},
+		event = { "VimEnter" },
 	    config = function ()
 	    	vim.defer_fn(function () -- Defer loading Copilot until nvim has already started
 	    	    require("copilot").setup()
@@ -155,7 +155,6 @@ return packer.startup(function()
 
 	use ({
 		'folke/noice.nvim',
-		event = "VimEnter",
 		requires = {
 			"MunifTanjim/nui.nvim",
 			"rcarriga/nvim-notify",

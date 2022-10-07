@@ -370,6 +370,18 @@ local LanguageBlock = {
 	}
 }
 
+local ShowCommand = {
+	condition = require("noice").api.statusline.command.has(),
+	provider = function ()
+		if require("noice").api.statusline.command.get() == nil then
+			return ""
+		else
+			return "  " .. require("noice").api.statusline.command.get() .. " "
+		end
+	end,
+	hl = { fg = "subtext0", bg = "surface0" }
+}
+
 -- Build out the status line
 local statusline = {
     ViMode,
@@ -380,6 +392,8 @@ local statusline = {
 	LSPActive,
 	Diagnostics,
 	Align,
+	ShowCommand,
+	Space,
 	Ruler,
 	Space,
 	FileEncoding,
