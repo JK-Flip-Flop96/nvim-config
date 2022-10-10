@@ -52,8 +52,13 @@ require("catppuccin").setup {
 
 			MasonError = { fg = mocha.red },
 
-			MasonHeading = { bold = true }
+			MasonHeading = { bold = true },
 
+			-- Alpha Colours
+			AlphaHeader = { fg = mocha.surface0 },
+			AlphaFooter = { fg = mocha.surface2 },
+			AlphaSectionHeader = { fg = mocha.surface2, bold = true },
+			AlphaShortcut = { fg = mocha.surface2 }
 		},
 	},
 }

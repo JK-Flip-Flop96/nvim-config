@@ -225,7 +225,7 @@ local LSPActive = {
 
 	provider = function ()
 		local names = {}
-		for i, server in pairs(vim.lsp.buf_get_clients(0)) do
+		for _, server in pairs(vim.lsp.buf_get_clients(0)) do
 			local name = server.name
 
 			-- Explicitly exclude copilot and null-ls from this element 
@@ -517,7 +517,7 @@ local winbar = {
 		condition = function()
 			return conditions.buffer_matches({
 				buftype = { "nofile", "prompt", "help", "quickfix", "NvimTree" },
-				filetype = { "^git.*", "fugitive" },
+				filetype = { "^git.*", "fugitive", "alpha" },
 			})
 		end,
 		init = function()
