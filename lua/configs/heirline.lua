@@ -382,6 +382,45 @@ local ShowCommand = {
 	hl = { fg = "subtext0", bg = "surface0" }
 }
 
+local SearchResults = {
+	condition = function(self)
+		local lines = vim.api.nvim_buf_line_count(0)
+		if lines > 50000 then return end
+
+		local query = vim.fn.getreg("/")
+		if query == "" then return end
+
+		if query:find("@") then return end
+
+		local search_count = vim.fn.searchcount({ recompute = 1, maxcount = -1})
+		local active = false
+		if vim.v.hlsearch and vim.v.hlsearch == 1 and search_count.total > 0 then
+			active = true
+		end
+		if not active then return end
+
+		query = query:gsub([[\\v]], "")
+		query = query:gsub([[\<]], ""):gsub([[\>]], "")
+
+		self.query = query
+		self.count = search_count
+		return true
+	end,
+	{
+		provider = function(self)
+			return '  '.. self.query .. ' '
+		end,
+		hl = { fg = "subtext0", bg = "surface0" }
+	},
+	{
+		provider = function(self)
+			return ' ' .. self.count.current .. '/' .. self.count.total .. ' '
+		end,
+		hl = { fg = "rosewater", bg = "surface1" }
+	},
+	Space
+}
+
 -- Build out the status line
 local statusline = {
     ViMode,
@@ -392,6 +431,7 @@ local statusline = {
 	LSPActive,
 	Diagnostics,
 	Align,
+	SearchResults,
 	ShowCommand,
 	Space,
 	Ruler,
