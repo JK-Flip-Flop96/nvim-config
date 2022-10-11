@@ -536,9 +536,9 @@ local FileWinbar = {
 	Align,
 	hl = function()
 		if conditions.is_active() then
-			return { fg = "subtext0", bg = "surface1" }
+			return { fg = "subtext1", bg = "surface1" }
 		else
-			return { fg = "subtext0", bg = "surface0" }
+			return { fg = "overlay0", bg = "surface0" }
 		end
 	end,
 }
