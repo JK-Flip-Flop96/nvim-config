@@ -478,9 +478,13 @@ local Navic = {
     },
     init = function(self)
 		local data = require("nvim-navic").get_data() or {}
-		local children = {{ provider = "> ", hl = { fg = "subtext0" }}}
+		local children = {}
 
 		for i, d in ipairs(data) do
+			if i == 1 then
+				table.insert(children, { provider = "> ", hl = { fg = "subtext0" }})
+			end
+
 	    	local child = {
 				{
 		    		provider = d.icon,
