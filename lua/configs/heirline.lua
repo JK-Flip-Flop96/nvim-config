@@ -478,7 +478,7 @@ local Navic = {
     },
     init = function(self)
 		local data = require("nvim-navic").get_data() or {}
-		local children = {}
+		local children = {{ provider = "> ", hl = { fg = "subtext0" }}}
 
 		for i, d in ipairs(data) do
 	    	local child = {
@@ -491,7 +491,7 @@ local Navic = {
 				},
 	    	}
 
-	    	if #data > 1 and i < #data then
+	    	if i < #data then
 				table.insert(child, {
 		    		provider = " > ",
 		    		hl = { fg = "subtext0" },
@@ -507,17 +507,46 @@ local Navic = {
     hl = { fg = "subtext0" },
 }
 
+local WinbarFileName = {
+	provider = function(self)
+		local filename = self.filename
+		filename = filename == "" and "[No Name]" or vim.fn.fnamemodify(filename, ":t")
+		return filename
+    end,
+}
+
+local WinbarFileNameBlock = {
+	init = function(self)
+		self.filename = vim.api.nvim_buf_get_name(0)
+	end,
+	FileIcon,
+	WinbarFileName
+}
 
 -- Build out the winbar
-local FileWinbar = { Space, Navic }
+local FileWinbar = {
+	Space,
+	WinbarFileNameBlock,
+	Space,
+	Navic,
+	Align,
+	hl = function()
+		if conditions.is_active() then
+			return { fg = "subtext0", bg = "surface1" }
+		else
+			return { fg = "subtext0", bg = "surface0" }
+		end
+	end,
+}
+
 
 local winbar = {
 	fallthrough = false,
 	{
 		condition = function()
 			return conditions.buffer_matches({
-				buftype = { "nofile", "prompt", "help", "quickfix", "NvimTree" },
-				filetype = { "^git.*", "fugitive", "alpha" },
+				buftype = { "nofile", "prompt", "help", "quickfix", "nvimtree" },
+				filetype = { "^git.*", "fugitive", "alpha", "nvimtree" },
 			})
 		end,
 		init = function()
@@ -525,13 +554,7 @@ local winbar = {
 		end,
 	},
 	{
-		condition = require("nvim-navic").is_available,
 		FileWinbar,
-	},
-	{
-		init = function()
-			vim.opt_local.winbar = nil
-		end,
 	}
 }
 
