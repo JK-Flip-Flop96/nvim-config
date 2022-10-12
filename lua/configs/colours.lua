@@ -11,13 +11,19 @@ require("catppuccin").setup {
 		enabled = true,
 		path = vim.fn.stdpath("cache") .. "/catppuccin",
 	},
-
+	dim_inactive = {
+		enabled = true,
+		shade = "dark",
+		percentage = 0.70,
+	},
 	integrations = {
 		lsp_trouble = true,
 		treesitter = true,
 		gitsigns = true,
 		cmp = true,
 		nvimtree = true,
+		telescope = true,
+		which_key = true,
 	},
 
     highlight_overrides = {

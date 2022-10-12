@@ -479,10 +479,11 @@ local Navic = {
     init = function(self)
 		local data = require("nvim-navic").get_data() or {}
 		local children = {}
+		local fg_hl = conditions.is_active() and "subtext1" or "overlay0"
 
 		for i, d in ipairs(data) do
 			if i == 1 then
-				table.insert(children, { provider = "> ", hl = { fg = "subtext0" }})
+				table.insert(children, { provider = "> ", hl = { fg = fg_hl }})
 			end
 
 	    	local child = {
@@ -492,13 +493,14 @@ local Navic = {
 				},
 				{
 		    		provider = d.name,
+					hl = { fg = fg_hl },
 				},
 	    	}
 
 	    	if i < #data then
 				table.insert(child, {
 		    		provider = " > ",
-		    		hl = { fg = "subtext0" },
+		    		hl = { fg = fg_hl },
 				})
 	    	end
 
@@ -523,6 +525,7 @@ local WinbarFileNameBlock = {
 	init = function(self)
 		self.filename = vim.api.nvim_buf_get_name(0)
 	end,
+	Space,
 	FileIcon,
 	WinbarFileName
 }
