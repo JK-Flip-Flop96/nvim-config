@@ -64,7 +64,12 @@ require("catppuccin").setup {
 			AlphaHeader = { fg = mocha.surface0 },
 			AlphaFooter = { fg = mocha.surface2 },
 			AlphaSectionHeader = { fg = mocha.surface2, bold = true },
-			AlphaShortcut = { fg = mocha.surface2 }
+			AlphaShortcut = { fg = mocha.surface2 },
+
+			--Telescope Colours
+			TelescopeNormal = { fg = mocha.text, bg = mocha.mantle },
+			TelescopeBorder = { fg = mocha.surface2 },
+			TelescopeTitle = { fg = mocha.subtext0 }
 		},
 	},
 }
