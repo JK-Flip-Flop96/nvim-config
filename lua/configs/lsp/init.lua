@@ -1,5 +1,9 @@
 -- LSP SETTINGS
 
+-- Call into the dedicated files for other servers
+require 'configs.lsp.sumneko_lua'
+require 'configs.lsp.null-ls'
+
 -- LSP servers
 local capabilities = require('cmp_nvim_lsp').update_capabilities(vim.lsp.protocol.make_client_capabilities())
 
