@@ -19,6 +19,8 @@ keymap ("n", "<A-Down>", ":resize -5<cr>", {})
 keymap ("n", "<A-l>", ":vertical resize +5<cr>", {})
 keymap ("n", "<A-Right>", ":vertical resize +5<cr>", {})
 
+keymap ("n", "<F1>", ":Telescope help_tags<cr>", {})
+
 -- Tmux Navigation Compatibility
 vim.cmd([[
 nnoremap <silent> <C-h> :lua require'nvim-tmux-navigation'.NvimTmuxNavigateLeft()<CR>

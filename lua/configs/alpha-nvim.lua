@@ -235,7 +235,6 @@ local buttons = {
 		{ type = "padding", val = 1 },
 		button("ff", "  Find File",     ":set laststatus=3 | :Telescope find_files <CR>"),
 		button("fg", "  Find Text",     ":set laststatus=3 | :Telescope live_grep <CR>"),
-		button("fh", "  Find Help", 	 ":set laststatus=3 | :Telescope help_tags<CR>"),
 		{ type = "padding", val = 1 },
         button("v", "  Neovim Settings ",      ":set laststatus=3 | e ~/.config/nvim/init.lua <CR>"),
         button("u", "  Update Nvim Plugins",   ":PackerUpdate <CR>"),
@@ -252,7 +251,10 @@ local footer = {
 	val = function()
 		local plugins_count = vim.fn.len(vim.fn.globpath("~/.local/share/nvim/site/pack/packer/start/", "*", 0, 1))
 		local lazy_plugin_count = vim.fn.len(vim.fn.globpath("~/.local/share/nvim/site/pack/packer/opt/", "*", 0, 1))
-		return "Loaded " .. plugins_count .. " Plugins. " .. plugins_count + lazy_plugin_count .. " Total Plugins"
+		local nvim_version = vim.version()
+		local nvim_version_string = string.format("%s.%s.%s", nvim_version.major, nvim_version.minor, nvim_version.patch)
+
+		return " " .. plugins_count .. "/" .. plugins_count + lazy_plugin_count .. "   " .. nvim_version_string
 	end,
 	opts = {
 		position = "center",
