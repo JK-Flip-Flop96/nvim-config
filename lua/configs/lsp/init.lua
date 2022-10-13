@@ -40,23 +40,6 @@ require('lspconfig').rust_analyzer.setup{
     capabilities = capabilities
 }
 
--- sumneko lua 
-require('lspconfig').sumneko_lua.setup{
-    capabilities = capabilities,
-    settings = {
-		Lua = {
-	    	-- Ensure that the LSP server recognises the 'vim' global 
-	    	-- and Packer's 'use' function
-	    	diagnostics = {
-				globals = { 'vim', 'use' }
-			},
-		}
-    },
-    on_attach = function(client, bufnr)
-		navic.attach(client, bufnr)
-    end,
-}
-
 -- taplo
 require('lspconfig').taplo.setup{
     capabilities = capabilities
