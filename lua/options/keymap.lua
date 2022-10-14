@@ -21,6 +21,8 @@ keymap ("n", "<A-Right>", ":vertical resize +5<cr>", {})
 
 keymap ("n", "<F1>", ":Telescope help_tags<cr>", {})
 
+keymap ("n", "<Leader>tg", ":2TermExec cmd=lazygit direction=float<cr>", {})
+
 -- Tmux Navigation Compatibility
 vim.cmd([[
 nnoremap <silent> <C-h> :lua require'nvim-tmux-navigation'.NvimTmuxNavigateLeft()<CR>
