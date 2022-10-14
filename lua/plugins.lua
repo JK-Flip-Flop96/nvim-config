@@ -40,7 +40,7 @@ return packer.startup(function()
 	}
 
 	-- Floating terminal windows
-	use {"akinsho/toggleterm.nvim", config = function()
+	use {"akinsho/toggleterm.nvim", tag = "*", config = function()
 		require("toggleterm").setup()
 	end}
 

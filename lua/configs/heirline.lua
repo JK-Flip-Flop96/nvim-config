@@ -546,6 +546,21 @@ local FileWinbar = {
 	end,
 }
 
+local TerminalWinbar = {
+	Align,
+	{
+		provider = "TERMINAL",
+	},
+	Align,
+	hl = function()
+		if conditions.is_active() then
+			return { fg = "red", bg = "surface1" }
+		else
+			return { fg = "red", bg = "surface0" }
+		end
+	end,
+}
+
 
 local winbar = {
 	fallthrough = false,
@@ -559,6 +574,14 @@ local winbar = {
 		init = function()
 			vim.opt_local.winbar = nil
 		end,
+	},
+	{
+		condition = function()
+			return conditions.buffer_matches({
+				buftype = { "terminal" },
+			})
+		end,
+		TerminalWinbar
 	},
 	{
 		FileWinbar,
