@@ -40,9 +40,10 @@ return packer.startup(function()
 	}
 
 	-- Floating terminal windows
-	use {"akinsho/toggleterm.nvim", tag = "*", config = function()
-		require("toggleterm").setup()
-	end}
+	use {
+		"akinsho/toggleterm.nvim",
+		tag = "*"
+	}
 
 	-- Custom Status Line
 	use "rebelot/heirline.nvim"
