@@ -7,20 +7,21 @@ end
 -- Setup Toggleterm
 toggleterm.setup()
 
--- Terminals -- 
--- 
+-- ## Terminals ## --
+
 local Terminal = require("toggleterm.terminal").Terminal
 
 -- Lazygit Terminal
 local lazygit = Terminal:new({ cmd = "lazygit", hidden = true, direction = "float" })
 
--- Functions --
+-- ## Functions ## --
 
 -- Function to toggle lazygit
 function Lazygit_Toggle()
 	lazygit:toggle()
 end
 
--- Keybinds --
+-- ## Keybinds ## --
 
 vim.api.nvim_set_keymap("n", "<leader>tg", ":lua Lazygit_Toggle()<CR>", { noremap = true, silent = true })
+
