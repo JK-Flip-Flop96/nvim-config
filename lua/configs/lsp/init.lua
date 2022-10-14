@@ -2,11 +2,12 @@
 
 -- Call into the dedicated files for other servers
 require 'configs.lsp.sumneko_lua'
+require 'configs.lsp.pyright'
 require 'configs.lsp.null-ls'
 
 -- LSP servers
-local capabilities = require('cmp_nvim_lsp').update_capabilities(vim.lsp.protocol.make_client_capabilities())
 
+local capabilities = require('cmp_nvim_lsp').update_capabilities(vim.lsp.protocol.make_client_capabilities())
 local navic = require("nvim-navic")
 
 -- clangd
@@ -34,10 +35,7 @@ require('lspconfig').julials.setup{
     capabilities = capabilities
 }
 
--- pyright
-require("lspconfig").pyright.setup{
-    capabilities = capabilities
-}
+
 
 -- rust analyzer
 require('lspconfig').rust_analyzer.setup{
