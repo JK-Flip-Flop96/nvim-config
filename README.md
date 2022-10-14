@@ -2,7 +2,37 @@
 
 ## Table of Contents
 
+* [Files](#files)
 * [Plugins](#plugins)
+
+## Files
+
+```
+.
+├── lua
+│  ├── configs
+│  │  ├── lsp
+│  │  │  ├── init.lua
+│  │  │  ├── null-ls.lua
+│  │  │  └── sumneko_lua.lua
+│  │  ├── alpha-nvim.lua
+│  │  ├── colours.lua
+│  │  ├── completion.lua
+│  │  ├── file-tree.lua
+│  │  ├── heirline.lua
+│  │  ├── indent-blankline.lua
+│  │  ├── mason.lua
+│  │  ├── neoscroll.lua
+│  │  ├── noice.lua
+│  │  ├── telescope.lua
+│  │  └── treesitter.lua
+│  ├── options
+│  │  ├── diagnostics.lua
+│  │  ├── keymap.lua
+│  │  └── options.lua
+│  └── plugins.lua
+└── init.lua
+```
 
 ## Plugins
 
