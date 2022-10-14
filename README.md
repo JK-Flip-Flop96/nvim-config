@@ -14,6 +14,7 @@
 │  │  ├── lsp
 │  │  │  ├── init.lua
 │  │  │  ├── null-ls.lua
+│  │  │  ├── pyright.lua
 │  │  │  └── sumneko_lua.lua
 │  │  ├── alpha-nvim.lua
 │  │  ├── colours.lua
