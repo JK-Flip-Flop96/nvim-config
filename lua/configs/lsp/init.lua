@@ -7,7 +7,7 @@ require 'configs.lsp.null-ls'
 
 -- LSP servers
 
-local capabilities = require('cmp_nvim_lsp').update_capabilities(vim.lsp.protocol.make_client_capabilities())
+local capabilities = require('cmp_nvim_lsp').default_capabilities()
 local navic = require("nvim-navic")
 
 -- clangd
@@ -34,8 +34,6 @@ require('lspconfig').hls.setup{
 require('lspconfig').julials.setup{
     capabilities = capabilities
 }
-
-
 
 -- rust analyzer
 require('lspconfig').rust_analyzer.setup{
