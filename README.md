@@ -1,5 +1,7 @@
 # NeoVim Configuration Files
 
+A full fat Nvim configuration with nothing optimised in the slightest
+
 ## Table of Contents
 
 * [Files](#files)
