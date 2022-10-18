@@ -172,7 +172,7 @@ local Ruler = {
 -- Git Information
 local GitFolder = {
 	conditions = conditions.is_git_repo,
-	update = "BufEnter",
+	update = { "BufEnter", "BufWrite" },
 	init = function (self)
 		local status = vim.fn.system("git status --porcelain")
 

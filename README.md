@@ -1,6 +1,6 @@
 # NeoVim Configuration Files
 
-A full fat Nvim configuration with nothing optimised in the slightest
+A full fat Nvim configuration with nothing optimised in the slightest. Lots of stuff to click on.
 
 ## Table of Contents
 
