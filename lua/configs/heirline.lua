@@ -170,24 +170,55 @@ local Ruler = {
 }
 
 -- Git Information
-local Git = {
+local GitFolder = {
 	conditions = conditions.is_git_repo,
-
+	update = "BufEnter",
 	init = function (self)
-		self.status_dict = vim.b.gitsigns_status_dict or { head = '', added = 0, changed = 0, removed = 0 }
-		self.has_changes = self.status_dict.added ~= 0 or self.status_dict.removed ~= 0 or self.status_dict.changed ~= 0
+		local status = vim.fn.system("git status --porcelain")
+
+		local status_table = {}
+
+		for s in status:gmatch("[^\r\n]+") do
+			table.insert(status_table, s)
+		end
+
+		local untracked = 0
+		local modified = 0
+		local staged = 0
+
+		for _, line in ipairs(status_table) do
+			local X = line:sub(1, 1)
+			local Y = line:sub(2, 2)
+			if X == "?" and Y == "?" then
+				untracked = untracked + 1
+			else
+				if Y == "M" then
+					modified = modified + 1
+				end
+				if Y == "A" or X == "M" then
+					staged = staged + 1
+				end
+			end
+		end
+
+		self.status_dict = {
+			untracked = untracked,
+			modified = modified,
+			staged = staged,
+			head = vim.fn.system("git rev-parse --abbrev-ref HEAD"):gsub("%s+", ""),
+		}
+		self.has_changes = self.status_dict.untracked ~= 0 or self.status_dict.modified ~= 0 or self.status_dict.staged ~= 0
 	end,
 
 	hl = { fg = "subtext0", bg = "surface1" },
-
 	{
-		condition = function (self)
-			return self.status_dict.head ~= ''
+		conditions = function(self)
+			return self.status_dict ~= ''
 		end,
-		provider = function (self)
-			return "  " .. self.status_dict.head .. " "
+		provider = function(self)
+			return "  " .. self.status_dict.head .. " "
 		end,
-		hl = { bg = "surface0" }
+		hl = { bg = "surface0" },
 	},
 	{
 		condition = function (self)
@@ -198,24 +229,24 @@ local Git = {
 	},
 	{
 		provider = function (self)
-			local count = self.status_dict.added or 0
+			local count = self.status_dict.staged or 0
 			return count > 0 and (" " .. count .. " ")
 		end,
-		hl = { fg = "green" }
+		hl = { fg = "teal" }
 	},
 	{
 		provider = function (self)
-			local count = self.status_dict.changed or 0
+			local count = self.status_dict.modified or 0
 			return count > 0 and (" " .. count .. " ")
 		end,
-		hl = { fg = "yellow" }
+		hl = { fg = "peach" }
 	},
 	{
 		provider = function (self)
-			local count = self.status_dict.removed or 0
-			return count > 0 and (" " .. count .. " ")
+			local count = self.status_dict.untracked or 0
+			return count > 0 and (" " .. count .. " ")
 		end,
-		hl = { fg = "red" }
+		hl = { fg = "blue" }
 	},
 	on_click = {
 		callback = function()
@@ -224,6 +255,60 @@ local Git = {
 			end, 100)
 		end,
 		name = "heirline_lazygit",
+	}
+}
+
+local GitFile = {
+	init = function(self)
+		self.filename = vim.api.nvim_buf_get_name(0)
+	end,
+	{
+		provider = function(self)
+			local filename = self.filename
+			filename = filename == "" and "[No Name]" or vim.fn.fnamemodify(filename, ":t")
+			return "  " .. filename .. " "
+		end,
+		hl = { fg = "subtext0", bg = "surface0" },
+	},
+	{
+
+		conditions = conditions.is_git_repo,
+
+		init = function (self)
+			self.status_dict = vim.b.gitsigns_status_dict or { head = '', added = 0, changed = 0, removed = 0 }
+			self.has_changes = self.status_dict.added ~= 0 or self.status_dict.removed ~= 0 or self.status_dict.changed ~= 0
+		end,
+
+		hl = { fg = "subtext0", bg = "surface1" },
+
+		{
+			condition = function (self)
+				return self.has_changes
+			end,
+			provider = " ",
+			hl = { fg = "surface1" }
+		},
+		{
+			provider = function (self)
+				local count = self.status_dict.added or 0
+				return count > 0 and (" " .. count .. " ")
+			end,
+			hl = { fg = "green" }
+		},
+		{
+			provider = function (self)
+				local count = self.status_dict.changed or 0
+				return count > 0 and (" " .. count .. " ")
+			end,
+			hl = { fg = "yellow" }
+		},
+		{
+			provider = function (self)
+				local count = self.status_dict.removed or 0
+				return count > 0 and (" " .. count .. " ")
+			end,
+			hl = { fg = "red" }
+		},
 	}
 }
 
@@ -434,7 +519,9 @@ local statusline = {
     ViMode,
 	WorkDir,
 	Space,
-	Git,
+	GitFolder,
+	Space,
+	GitFile,
 	Space,
 	LSPActive,
 	Diagnostics,
