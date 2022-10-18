@@ -217,6 +217,14 @@ local Git = {
 		end,
 		hl = { fg = "red" }
 	},
+	on_click = {
+		callback = function()
+			vim.defer_fn(function()
+				Lazygit_Toggle()
+			end, 100)
+		end,
+		name = "heirline_lazygit",
+	}
 }
 
 local LSPActive = {
