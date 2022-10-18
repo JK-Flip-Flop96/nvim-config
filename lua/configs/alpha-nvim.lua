@@ -152,7 +152,12 @@ local function mru(start, cwd, items_number, opts)
           end
         end
 
-        local shortcut = tostring(i+start-1)
+		local shortcut = tostring(i+start-1)
+
+		--HACK to change 10 to 0
+		if shortcut == "10" then
+			shortcut = "0"
+		end
 
         local file_button_el = file_button(fn, shortcut, short_fn)
         tbl[i] = file_button_el
