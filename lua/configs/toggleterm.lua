@@ -12,7 +12,19 @@ toggleterm.setup()
 local Terminal = require("toggleterm.terminal").Terminal
 
 -- Lazygit Terminal
-local lazygit = Terminal:new({ cmd = "lazygit", hidden = true, direction = "float" })
+local lazygit = Terminal:new({
+	cmd = "lazygit",
+	hidden = true,
+	direction = "float",
+	float_opts = {
+		border = {"┏", "━", "┓", "┃", "┛", "━", "┗", "┃"},
+	},
+	highlights = {
+		FloatBorder = {
+			link = "LazygitBorder"
+		}
+	}
+})
 
 -- ## Functions ## --
 

@@ -69,7 +69,10 @@ require("catppuccin").setup {
 			--Telescope Colours
 			TelescopeNormal = { fg = mocha.text, bg = mocha.mantle },
 			TelescopeBorder = { fg = mocha.surface2 },
-			TelescopeTitle = { fg = mocha.subtext0 }
+			TelescopeTitle = { fg = mocha.subtext0 },
+
+			--ToggleTerm Custom Colours
+			LazygitBorder = { fg = mocha.surface2 },
 		},
 	},
 }
