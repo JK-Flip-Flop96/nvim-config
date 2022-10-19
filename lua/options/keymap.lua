@@ -6,6 +6,8 @@ keymap("", "<Space>", "<Nop>", {})
 vim.g.mapleader = " "
 vim.g.maplocalleader = " "
 
+-- ## NORMAL MODE ## --
+
 -- Resizing splits with Alt + [HJKL]/Alt + [Arrow Keys]
 keymap ("n", "<A-h>", ":vertical resize -5<cr>", {})
 keymap ("n", "<A-Left>", ":vertical resize -5<cr>", {})
@@ -30,3 +32,8 @@ nnoremap <silent> <C-l> :lua require'nvim-tmux-navigation'.NvimTmuxNavigateRight
 nnoremap <silent> <C-\> :lua require'nvim-tmux-navigation'.NvimTmuxNavigateLastActive()<CR>
 nnoremap <silent> <C-Space> :lua require'nvim-tmux-navigation'.NvimTmuxNavigateNext()<CR>
 ]])
+
+-- ## INSERT MODE ## --
+
+-- Shift-Tab to de-tab
+keymap ("i", "<S-Tab>", "<C-d>", {})
