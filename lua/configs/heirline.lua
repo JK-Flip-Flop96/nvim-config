@@ -87,22 +87,6 @@ local ViMode = {
 	    	["!"] = "!",
 	    	t = "TERMINAL",
 		},
-		-- Define the color used in each mode
-		mode_colors = {
-	    	n = {"blue", "base"},
-	    	i = {"green", "base"},
-	    	v = {"teal", "base"},
-	    	V = {"teal", "base"},
-	    	["\22"] = {"teal", "base"},
-	    	c = {"peach", "base"},
-	    	s = {"mauve", "base"},
-	    	S = {"mauve", "base"},
-	    	["\19"] = {"mauve", "base"},
-	    	R = {"peach", "base"},
-	    	r = {"peach", "base"},
-	    	["!"] = {"red", "base"},
-	    	t = {"red", "base"},
-		}
     },
 
     -- Define the layout of the indicator
@@ -112,14 +96,11 @@ local ViMode = {
 
     -- Define the colours of the indicator
     hl = function(self)
-		-- Get the first chatacter of the mode
-		local mode = self.mode:sub(1, 1)
-
 		-- Get the pair of colours from the table
-		local m_colors = self.mode_colors[mode]
+		local m_colors = self:mode_color()
 
 		-- Return the highlight
-		return {bg = m_colors[1], fg = m_colors[2], }
+		return { bg = m_colors[1], fg = m_colors[2], }
     end,
 
     -- Update when the vim mode changes
@@ -455,11 +436,11 @@ local LanguageBlock = {
 	FileIcon,
 	FileType,
 	Space,
-	hl = {
-		fg = "base",
-		bg = "blue",
-		force = true,
-	}
+	hl = function(self)
+		-- Colour this element based on the current vim mode
+		local mode_color = self:mode_color()	
+		return { bg = mode_color[1], fg = mode_color[2], force = true }
+	end,
 }
 
 local ShowCommand = {
@@ -515,26 +496,52 @@ local SearchResults = {
 
 -- Build out the status line
 local statusline = {
-    ViMode,
-	WorkDir,
-	Space,
-	GitFolder,
-	Space,
-	GitFile,
-	Space,
-	LSPActive,
-	Diagnostics,
-	Align,
-	SearchResults,
-	ShowCommand,
-	Space,
-	Ruler,
-	Space,
-	FileEncoding,
-	Space,
-	FileFormat,
-	Space,
-	LanguageBlock
+	{
+    	ViMode,
+		WorkDir,
+		Space,
+		GitFolder,
+		Space,
+		GitFile,
+		Space,
+		LSPActive,
+		Diagnostics,
+		Align,
+		SearchResults,
+		ShowCommand,
+		Space,
+		Ruler,
+		Space,
+		FileEncoding,
+		Space,
+		FileFormat,
+		Space,
+		LanguageBlock,
+	},
+	static = {
+		-- Define the color used in each mode
+		mode_colors_map = {
+	    	n = {"blue", "base"},
+			i = {"green", "base"},
+    		v = {"teal", "base"},
+    		V = {"teal", "base"},
+    		["\22"] = {"teal", "base"},
+    		c = {"peach", "base"},
+    		s = {"mauve", "base"},
+    		S = {"mauve", "base"},
+    		["\19"] = {"mauve", "base"},
+    		R = {"peach", "base"},
+    		r = {"peach", "base"},
+    		["!"] = {"red", "base"},
+    		t = {"red", "base"},
+		},
+
+		-- Function to get the current mode colour 
+		mode_color = function(self)
+			local mode = conditions.is_active() and vim.fn.mode() or "n"
+			return self.mode_colors_map[mode]
+		end,
+	}
 }
 
 -- ## WINBAR ## --
