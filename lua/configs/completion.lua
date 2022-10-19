@@ -1,25 +1,22 @@
--- Load and Ready Cmp
+-- Load required plugins
 local cmp_status_ok, cmp = pcall(require, "cmp")
-if not cmp_status_ok then
-    return
-end
-
--- Load and Ready LuaSnip
 local snip_status_ok, luasnip = pcall(require, "luasnip")
-if not snip_status_ok then
+local nvim_autopairs_ok, nvim_autopairs = pcall(require, "nvim-autopairs")
+if not cmp_status_ok and not snip_status_ok and not nvim_autopairs_ok then
     return
 end
 
 -- Configure LuaSnip's Loader
 require("luasnip/loaders/from_vscode").lazy_load()
 
+-- Configure nvim-autopairs
+nvim_autopairs.setup()
+
 --
 local has_words_before = function()
     local line, col = unpack(vim.api.nvim_win_get_cursor(0))
     return col ~= 0 and vim.api.nvim_buf_get_lines(0, line - 1, line, true)[1]:sub(col, col):match("%s") == nil
 end
-
-				
 
 -- Configure icons for use by cmp
 local kind_icons = {
@@ -143,3 +140,9 @@ cmp.setup.cmdline(":", {
 		{ name = 'cmdline' }
     })
 })
+
+-- ## Cmp Event Handlers ## --
+
+-- Autopairs
+local cmp_autopairs = require("nvim-autopairs.completion.cmp")
+cmp.event:on("confirm_done", cmp_autopairs.on_confirm_done())

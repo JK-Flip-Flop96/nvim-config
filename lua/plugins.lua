@@ -87,6 +87,9 @@ return packer.startup(function()
 	use "saadparwaiz1/cmp_luasnip" -- Cmp/LuaSnip Compatability
 	use "rafamadriz/friendly-snippets" -- Snippets
 
+	-- Autopairs
+	use "windwp/nvim-autopairs"
+
 	-- GitHub Co-Pilot
 	--use "github/copilot.vim" -- Main Co-Pilot Plugin - Only enable if you want to configure the Co-Pilot Plugin
 	use {
