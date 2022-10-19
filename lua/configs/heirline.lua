@@ -1,5 +1,4 @@
 -- Load Heirline
-
 local heirline_status, heirline = pcall(require, "heirline")
 
 -- Exit on Load Error

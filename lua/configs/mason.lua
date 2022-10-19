@@ -11,12 +11,12 @@ end
 -- Mason setup
 mason.setup({
     ui = {
-	border = "none",
-	icons = {
-	    server_installed = "",
-	    server_pending = "",
-	    server_uninstalled = ""
-	}
+		border = {"┏", "━", "┓", "┃", "┛", "━", "┗", "┃"},
+		icons = {
+	    	server_installed = "",
+	    	server_pending = "",
+	    	server_uninstalled = ""
+		}
     }
 })
 

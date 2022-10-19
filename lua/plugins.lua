@@ -10,7 +10,7 @@ end
 packer.init {
 	display = {
 		open_fn = function()
-			return require("packer.util").float { border = "none" }
+			return require("packer.util").float { border = {"┏", "━", "┓", "┃", "┛", "━", "┗", "┃" } }
 		end,
 	},
 	auto_reload_compiled = true,

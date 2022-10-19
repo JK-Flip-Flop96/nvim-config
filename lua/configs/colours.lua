@@ -32,11 +32,18 @@ require("catppuccin").setup {
 		frappe = {},
 		macchiato = {},
 		mocha = {
+			-- Neovim Colours
+			-- Tabline 
 			TabLineFill = { fg = mocha.lavender, bg = mocha.base },
 			TablineSel = { fg = mocha.subtext1, bg = mocha.surface1 },
 			Tabline = { fg = mocha.overlay0, bg = mocha.surface0 },
+
+			-- Editor
 			Comment = { fg = mocha.overlay1 },
 			CursorLineNR = { fg = mocha.yellow },
+
+			-- Floats
+			FloatBorder = { fg = mocha.surface2 },
 
 			-- Mason Colours 
 			MasonHeader = { fg = mocha.base, bg = mocha.peach },
