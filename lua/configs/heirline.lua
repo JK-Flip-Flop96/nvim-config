@@ -154,17 +154,13 @@ local GitFolder = {
 	conditions = conditions.is_git_repo,
 	update = { "BufEnter", "BufWrite" },
 	init = function (self)
-		local status = vim.fn.system("git status --porcelain")
-
 		local status_table = {}
 
-		for s in status:gmatch("[^\r\n]+") do
+		for s in vim.fn.system("git status --porcelain"):gmatch("[^\r\n]+") do
 			table.insert(status_table, s)
 		end
 
-		local untracked = 0
-		local modified = 0
-		local staged = 0
+		local untracked, modified, staged = 0, 0, 0
 
 		for _, line in ipairs(status_table) do
 			local X = line:sub(1, 1)
@@ -251,7 +247,6 @@ local GitFile = {
 		hl = { fg = "subtext0", bg = "surface0" },
 	},
 	{
-
 		conditions = conditions.is_git_repo,
 
 		init = function (self)
@@ -438,13 +433,13 @@ local LanguageBlock = {
 	Space,
 	hl = function(self)
 		-- Colour this element based on the current vim mode
-		local mode_color = self:mode_color()	
+		local mode_color = self:mode_color()
 		return { bg = mode_color[1], fg = mode_color[2], force = true }
 	end,
 }
 
 local ShowCommand = {
-	condition = require("noice").api.statusline.command.has(),
+	condition = require("noice").api.statusline.command.has() and vim.fn.mode():sub(1,1) == "n",
 	provider = function ()
 		if require("noice").api.statusline.command.get() == nil then
 			return ""
