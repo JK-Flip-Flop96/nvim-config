@@ -1,9 +1,9 @@
 -- LSP SETTINGS
 
 -- Call into the dedicated files for other servers
-require 'configs.lsp.sumneko_lua'
-require 'configs.lsp.pyright'
-require 'configs.lsp.null-ls'
+require 'configs.lsp.servers.sumneko_lua'
+require 'configs.lsp.servers.pyright'
+require 'configs.lsp.servers.null-ls'
 
 -- LSP servers
 

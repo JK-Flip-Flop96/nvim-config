@@ -90,6 +90,9 @@ return packer.startup(function()
 	-- Autopairs
 	use "windwp/nvim-autopairs"
 
+	use "mfussenegger/nvim-dap"
+	use "rcarriga/nvim-dap-ui"
+
 	-- GitHub Co-Pilot
 	--use "github/copilot.vim" -- Main Co-Pilot Plugin - Only enable if you want to configure the Co-Pilot Plugin
 	use {
