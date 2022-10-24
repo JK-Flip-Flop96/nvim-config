@@ -17,6 +17,7 @@ set.title = true
 -- Command Line
 set.cmdheight = 0
 set.showmode = false
+set.cul = true
 
 -- Status Line
 set.laststatus = 3
