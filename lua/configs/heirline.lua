@@ -439,7 +439,7 @@ local LanguageBlock = {
 }
 
 local ShowCommand = {
-	condition = require("noice").api.statusline.command.has() and vim.fn.mode():sub(1,1) == "n",
+	condition = false,
 	provider = function ()
 		if require("noice").api.statusline.command.get() == nil then
 			return ""

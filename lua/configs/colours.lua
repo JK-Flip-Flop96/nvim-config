@@ -35,8 +35,8 @@ require("catppuccin").setup {
 			-- Neovim Colours
 			-- Tabline 
 			TabLineFill = { fg = mocha.lavender, bg = mocha.base },
-			TablineSel = { fg = mocha.subtext1, bg = mocha.surface1 },
-			Tabline = { fg = mocha.overlay0, bg = mocha.surface0 },
+			TabLineSel = { fg = mocha.subtext1, bg = mocha.surface1 },
+			TabLine = { fg = mocha.overlay0, bg = mocha.surface0 },
 
 			-- Editor
 			Comment = { fg = mocha.overlay1 },

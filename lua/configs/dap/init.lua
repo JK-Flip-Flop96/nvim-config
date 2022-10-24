@@ -9,3 +9,4 @@ dapui.setup()
 
 -- Adapters
 require "configs.dap.adapters.debugpy"
+require "configs.dap.adapters.codelldb"
