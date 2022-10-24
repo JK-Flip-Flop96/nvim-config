@@ -899,4 +899,4 @@ local TablineOffset = {
 local tabline = {TablineOffset, BufferLine, TabPages }
 
 -- Set the statusline
-heirline.setup(statusline, winbar, tabline)
+heirline.setup({TablineOffset, statusline}, winbar, tabline)
