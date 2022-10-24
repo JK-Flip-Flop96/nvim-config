@@ -24,6 +24,10 @@ require("catppuccin").setup {
 		nvimtree = true,
 		telescope = true,
 		which_key = true,
+		dap = {
+			enabled = true,
+			enable_ui = true,
+		},
 	},
 
     highlight_overrides = {
