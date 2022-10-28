@@ -28,6 +28,7 @@ require("catppuccin").setup {
 			enabled = true,
 			enable_ui = true,
 		},
+		noice = true,
 	},
 
     highlight_overrides = {
