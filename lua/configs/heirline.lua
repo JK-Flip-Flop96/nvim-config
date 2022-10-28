@@ -489,9 +489,30 @@ local SearchResults = {
 	Space
 }
 
+local StatusLineOffset = {
+	condition = function(self)
+		local win = vim.api.nvim_tabpage_list_wins(0)[1]
+		local bufnr = vim.api.nvim_win_get_buf(win)
+		self.winid = win
+
+		if vim.bo[bufnr].filetype == "NvimTree" then
+			return true
+		end
+	end,
+	{
+		provider = function(self)
+			return string.rep(" ", vim.api.nvim_win_get_width(self.winid))
+		end,
+
+		hl = { bg = "mantle" },
+	},
+}
+
+
 -- Build out the status line
 local statusline = {
 	{
+		StatusLineOffset,
     	ViMode,
 		WorkDir,
 		Space,
@@ -899,4 +920,4 @@ local TablineOffset = {
 local tabline = {TablineOffset, BufferLine, TabPages }
 
 -- Set the statusline
-heirline.setup({TablineOffset, statusline}, winbar, tabline)
+heirline.setup(statusline, winbar, tabline)
