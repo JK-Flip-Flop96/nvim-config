@@ -47,6 +47,9 @@ require("catppuccin").setup {
 			Comment = { fg = mocha.overlay1 },
 			CursorLineNR = { fg = mocha.yellow },
 
+			-- Splits
+			VertSplit = { fg = mocha.surface0 },
+
 			-- Floats
 			FloatBorder = { fg = mocha.surface2 },
 

@@ -17,13 +17,24 @@ set.title = true
 -- Command Line
 set.cmdheight = 0
 set.showmode = false
-set.cul = true
 
 -- Status Line
 set.laststatus = 3
 
 -- Sign Column
 set.signcolumn = "yes" -- Prevents bouncing when the signcolumn is enabled/disabled
+
+-- Remove the tildas after the buffer
+set.fillchars:append {
+	horiz = "━",
+	horizup = "┻",
+	horizdown = "┳",
+	vert = "┃",
+	vertleft = "┫",
+	vertright = "┣",
+	verthoriz = "╋",
+	eob = " ",
+}
 
 -- EDITOR
 

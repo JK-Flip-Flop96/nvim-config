@@ -10,9 +10,6 @@ if not path_ok then
     return
 end
 
--- Remove the tildas after the buffer
-vim.opt.fillchars:append { eob = " " }
-
 vim.cmd [[ au User AlphaReady if winnr('$') == 1 | set laststatus=1 ]]
 vim.cmd [[ autocmd User AlphaReady set showtabline=0 | autocmd BufUnload <buffer> set showtabline=2 ]]
 
