@@ -117,6 +117,16 @@ cmp.setup {
 		{ name = "buffer" },
 		{ name = "cmdline" },
     }),
+	window = {
+		completion = {
+			border = { "┏", "━", "┓", "┃", "┛", "━", "┗", "┃" },
+			winhighlight = "NormalFloat:NormalFloat", -- Override Catppuccin's cmp style
+		},
+		documentation = {
+			border = { "┏", "━", "┓", "┃", "┛", "━", "┗", "┃" },
+			winhighlight = "NormalFloat:NormalFloat", -- Override Catppuccin's cmp style
+		},
+	},
 
     -- Cmp Experimental Features
     experimental = {

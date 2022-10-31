@@ -19,8 +19,8 @@ noice.setup({
 				height = "auto",
 			},
 			border = {
-				style = "none",
-				padding = { 1, 2 }
+				style = { "┏", "━", "┓", "┃", "┛", "━", "┗", "┃" },
+				padding = { 0, 1 }
 			},
 			win_options = {
 				winhighlight = { Normal = "NormalFloat", FloatBorder = "NormalFloat" }
@@ -38,7 +38,7 @@ noice.setup({
 			},
 			border = {
 				style = "none",
-				padding = { 1, 2 },
+				padding = { 0, 1 },
 			},
 			win_options = {
 				winhighlight = { Normal = "NormalFloat", FloatBorder = "NormalFloat" }

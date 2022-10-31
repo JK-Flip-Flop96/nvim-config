@@ -53,6 +53,16 @@ require("catppuccin").setup {
 			-- Floats
 			FloatBorder = { fg = mocha.surface2 },
 
+			-- Noice			
+			NoiceCmdlineIcon = { fg = mocha.peach },
+			NoiceCmdlineIconCmdline = { fg = mocha.peach },
+
+			NoiceCmdlinePopupBorder = { fg = mocha.surface2 },
+			NoiceCmdlinePopupBorderCmdline = { fg = mocha.surface2 },
+			NoiceCmdlinePopupBorderSearch = { fg = mocha.surface2 },
+			NoiceCmdlinePopupBorderFilter = { fg = mocha.surface2 },
+			NoiceCmdlinePopupBorderlua = { fg = mocha.surface2 },
+
 			-- Mason Colours 
 			MasonHeader = { fg = mocha.base, bg = mocha.peach },
 			MasonHeaderSecondary = { fg = mocha.base, bg = mocha.teal },
