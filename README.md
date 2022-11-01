@@ -1,6 +1,8 @@
 # NeoVim Configuration Files
 
 A full fat Nvim configuration with nothing optimised in the slightest. Lots of stuff to click on.
+shoddyy metre meter sulphur sulfur civilisationd 
+
 
 ## Table of Contents
 
@@ -49,7 +51,7 @@ A full fat Nvim configuration with nothing optimised in the slightest. Lots of s
 
 [nvim-web-devicons](https://github.com/kyazdani42/nvim-web-devicons) - Icons
 
-[alpha-nvim](https://github.com/goolord/alpha-nvim) - A configurable start screen for NeoVim
+[alpha-nvim](https://github.com/goolord/alpha-nvim) - A configurable start screen for Neovim
 
 [gitsigns.nvim](https://github.com/lewis6991/gitsigns.nvim) - Gutter signs for git, also used by other plugins for git compatability
 

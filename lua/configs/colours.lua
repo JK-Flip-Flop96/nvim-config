@@ -51,6 +51,7 @@ require("catppuccin").setup {
 			VertSplit = { fg = mocha.surface0 },
 
 			-- Floats
+			FloatNormal = { fg = mocha.text, bg = mocha.mantle },
 			FloatBorder = { fg = mocha.surface2 },
 
 			-- Noice			
@@ -98,6 +99,31 @@ require("catppuccin").setup {
 
 			--ToggleTerm Custom Colours
 			LazygitBorder = { fg = mocha.surface2 },
+
+			--Nvim-Notify Colours
+			NotifyERRORBorder = { fg = mocha.surface2, bg = mocha.mantle },
+			NotifyWARNBorder = { fg = mocha.surface2, bg = mocha.mantle },
+			NotifyINFOBorder = { fg = mocha.surface2, bg = mocha.mantle },
+			NotifyDEBUGBorder = { fg = mocha.surface2, bg = mocha.mantle },
+			NotifyTRACEBorder = { fg = mocha.surface2, bg = mocha.mantle },
+
+			NotifyERRORIcon = { fg = mocha.red, bg = mocha.mantle },
+			NotifyWARNIcon = { fg = mocha.yellow, bg = mocha.mantle },
+			NotifyINFOIcon = { fg = mocha.green, bg = mocha.mantle },
+			NotifyDEBUGIcon = { fg = mocha.surface2, bg = mocha.mantle },
+			NotifyTRACEIcon = { fg = mocha.lavender, bg = mocha.mantle },
+
+			NotifyERRORTitle = { fg = mocha.red, bg = mocha.mantle },
+			NotifyWARNTitle = { fg = mocha.yellow, bg = mocha.mantle },
+			NotifyINFOTitle = { fg = mocha.green, bg = mocha.mantle },
+			NotifyDEBUGTitle = { fg = mocha.surface2, bg = mocha.mantle },
+			NotifyTRACETitle = { fg = mocha.lavender, bg = mocha.mantle },
+
+			NotifyERRORBody = { fg = mocha.text, bg = mocha.mantle },
+			NotifyWARNBody = { fg = mocha.text, bg = mocha.mantle },
+			NotifyINFOBody = { fg = mocha.text, bg = mocha.mantle },
+			NotifyDEBUGBody = { fg = mocha.text, bg = mocha.mantle },
+			NotifyTRACEBody = { fg = mocha.text, bg = mocha.mantle },
 		},
 	},
 }
