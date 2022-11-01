@@ -113,6 +113,8 @@ return packer.startup(function()
 		end,
 	}
 
+	use 'simrat39/symbols-outline.nvim'
+
 	-- LSP Diagnostic Information printed on seperate lines
 	use({
 	    "https://git.sr.ht/~whynothugo/lsp_lines.nvim",
