@@ -82,5 +82,3 @@ require('notify').setup({
 	},
 	render = custom_render
 })
-
-
