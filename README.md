@@ -8,6 +8,7 @@ shoddyy metre meter sulphur sulfur civilisationd
 
 * [Files](#files)
 * [Plugins](#plugins)
+* [Known Issues](#Known Issues)
 
 ## Files
 
@@ -55,4 +56,6 @@ shoddyy metre meter sulphur sulfur civilisationd
 
 [gitsigns.nvim](https://github.com/lewis6991/gitsigns.nvim) - Gutter signs for git, also used by other plugins for git compatability
 
+## Known Issues
+* Tabline doesn't appear when opening a file from the command line.
 
