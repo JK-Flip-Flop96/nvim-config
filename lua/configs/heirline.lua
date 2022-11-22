@@ -151,7 +151,7 @@ local Ruler = {
 
 -- Git Information
 local GitFolder = {
-	conditions = conditions.is_git_repo,
+	condition = conditions.is_git_repo,
 	update = { "BufEnter", "BufWrite" },
 	init = function (self)
 		local status_table = {}
@@ -188,8 +188,8 @@ local GitFolder = {
 
 	hl = { fg = "subtext0", bg = "surface1" },
 	{
-		conditions = function(self)
-			return self.status_dict ~= ''
+		condition = function(self)
+			return self.status_dict.head:sub(1, 5) ~= 'fatal'
 		end,
 		provider = function(self)
 			return "  " .. self.status_dict.head .. " "
@@ -247,7 +247,7 @@ local GitFile = {
 		hl = { fg = "subtext0", bg = "surface0" },
 	},
 	{
-		conditions = conditions.is_git_repo,
+		condition = conditions.is_git_repo,
 
 		init = function (self)
 			self.status_dict = vim.b.gitsigns_status_dict or { head = '', added = 0, changed = 0, removed = 0 }
@@ -288,7 +288,7 @@ local GitFile = {
 }
 
 local LSPActive = {
-	conditions = conditions.lsp_attached,
+	condition = conditions.lsp_attached,
 	update = { 'LspAttach', 'LspDetach', 'BufEnter' },
 
 	provider = function ()
@@ -315,7 +315,7 @@ local LSPActive = {
 -- Diagnostics signs 
 local Diagnostics = {
     -- Only display this component if diagnostics are available for the current buffer
-    conditions = conditions.has_diagnostics,
+    condition = conditions.has_diagnostics,
 
     -- Get the icons for the diagnostics
     static = {
