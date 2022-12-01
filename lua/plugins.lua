@@ -39,6 +39,11 @@ return packer.startup(function()
 		requires = { 'kyazdani42/nvim-web-devicons' },
 	}
 
+	use {
+		'luukvbaal/nnn.nvim',
+		config = function() require("nnn").setup() end
+	}
+
 	-- Floating terminal windows
 	use {
 		"akinsho/toggleterm.nvim",
