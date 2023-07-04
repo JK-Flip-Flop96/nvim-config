@@ -1,3 +1,5 @@
+## WARNING: This config is broken as shit, new one in the works
+
 # NeoVim Configuration Files
 
 A full fat Nvim configuration with nothing optimised in the slightest. Lots of stuff to click on.
